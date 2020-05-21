@@ -12,5 +12,4 @@ items: number[];
 
   ngOnInit(): void {
   }
-
 }
