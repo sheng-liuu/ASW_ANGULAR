@@ -28,11 +28,7 @@ export class CommentService {
     'https://hackernews12c.herokuapp.com/api/v1/user/' +username + '/threads', httpOptions);
   }
   
-<<<<<<< HEAD
-  getCommentDetails(id_comment: number): Observable<Comment> {
-=======
   getUpvotedComment(): Observable<Comment[]> {
->>>>>>> 24107c95c4ff329bf1a139508586fe19156d10ed
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -40,13 +36,20 @@ export class CommentService {
         'Accept': 'application/json'
       })
     };
-    
-<<<<<<< HEAD
-    return this.http.get<Comment>(
-    'https://hackernews12c.herokuapp.com/api/v1/comments/' + id_comment, httpOptions);
-=======
     return this.http.get<Comment[]>(
     'https://hackernews12c.herokuapp.com/api/v1/user/upvotedcomment', httpOptions);
->>>>>>> 24107c95c4ff329bf1a139508586fe19156d10ed
   }
+  
+  getCommentDetails(id_comment: number): Observable<Comment> {
+     const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'X-API-KEY': localStorage.getItem("apikey"),
+        'Accept': 'application/json'
+      })
+    };
+    return this.http.get<Comment>(
+    'https://hackernews12c.herokuapp.com/api/v1/comments/' + id_comment, httpOptions);
+  }
+  
 }
