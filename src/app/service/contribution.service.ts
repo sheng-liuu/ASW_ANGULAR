@@ -41,4 +41,16 @@ export class ContributionService {
     return this.http.get<Contribution[]>(
     'https://hackernews12c.herokuapp.com/api/v1/user/upvoted', httpOptions);
   }
+  
+  getContribution(id): Observable<Contribution> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'X-API-KEY': localStorage.getItem("apikey"),
+        'Accept': 'application/json'
+      })
+    };
+    return this.http.get<Contribution>(
+    'https://hackernews12c.herokuapp.com/api/v1/contributions'+ id, httpOptions);
+  }
 }

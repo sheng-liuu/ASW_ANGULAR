@@ -1,6 +1,7 @@
 export class Contribution {
   id: number;
   title: string;
+  url: string;
   text: string;
   points: number;
   nametype: string;

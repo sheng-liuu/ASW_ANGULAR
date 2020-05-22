@@ -5,6 +5,7 @@ import { SubmittedComponent } from './submitted/submitted.component';
 import { ThreadsComponent } from './threads/threads.component';
 import { UpvotedComponent } from './upvoted/upvoted.component';
 import { UpvotedcommentComponent } from './upvotedcomment/upvotedcomment.component';
+import { ContributionDetailsComponent } from './contribution-details/contribution-details.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path:  'threads', component: ThreadsComponent},
   {path:  'upvoted', component: UpvotedComponent},
   {path:  'upvotedcomment', component: UpvotedcommentComponent},
+  {path:  'contribution-details', component: ContributionDetailsComponent},
   ];
 
 @NgModule({

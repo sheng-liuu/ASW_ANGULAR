@@ -13,6 +13,7 @@ import { SubmittedComponent } from './submitted/submitted.component';
 import { ThreadsComponent } from './threads/threads.component';
 import { UpvotedComponent } from './upvoted/upvoted.component';
 import { UpvotedcommentComponent } from './upvotedcomment/upvotedcomment.component';
+import { ContributionDetailsComponent } from './contribution-details/contribution-details.component';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -35,6 +36,7 @@ export function socialConfigs() {
     ThreadsComponent,
     UpvotedComponent,
     UpvotedcommentComponent,
+    ContributionDetailsComponent,
   ],
   imports: [
     BrowserModule,
