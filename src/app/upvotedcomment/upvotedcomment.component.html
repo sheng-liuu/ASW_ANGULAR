@@ -1,0 +1,19 @@
+<table width="85%" style="color:gray"><div class="main-content">
+  <ol *ngIf="items!=null">
+    <li *ngFor="let item of items;" class="post">
+      <table>
+        <tr>
+          <td>by <a [routerLink] = "'/user'">{{item.user_id}}</a></td>
+          <td><a [routerLink] = "'/#'">{{item.created_at}}</a> | </td>
+          <td><a [routerLink] = "'/#'">parent</a> | </td>
+          <td>on: <a [routerLink] = "'/#'">{{item.contribution_id}}</a></td>
+        </tr>
+        <tr>
+          <td>{{item.content}}</td>
+        </tr>
+      </table>
+        
+      
+    </li>
+  </ol>
+</div></table>

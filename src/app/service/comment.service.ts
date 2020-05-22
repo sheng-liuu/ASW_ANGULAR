@@ -27,4 +27,17 @@ export class CommentService {
     return this.http.get<Comment[]>(
     'https://hackernews12c.herokuapp.com/api/v1/user/' +username + '/threads', httpOptions);
   }
+  
+  getUpvotedComment(): Observable<Comment[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'X-API-KEY': localStorage.getItem("apikey"),
+        'Accept': 'application/json'
+      })
+    };
+    
+    return this.http.get<Comment[]>(
+    'https://hackernews12c.herokuapp.com/api/v1/user/upvotedcomment', httpOptions);
+  }
 }

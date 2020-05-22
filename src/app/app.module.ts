@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SubmittedComponent } from './submitted/submitted.component';
 import { ThreadsComponent } from './threads/threads.component';
 import { UpvotedComponent } from './upvoted/upvoted.component';
+import { UpvotedcommentComponent } from './upvotedcomment/upvotedcomment.component';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -33,6 +34,7 @@ export function socialConfigs() {
     SubmittedComponent,
     ThreadsComponent,
     UpvotedComponent,
+    UpvotedcommentComponent,
   ],
   imports: [
     BrowserModule,
