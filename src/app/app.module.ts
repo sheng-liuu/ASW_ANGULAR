@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SubmittedComponent } from './submitted/submitted.component';
 import { ThreadsComponent } from './threads/threads.component';
+import { UpvotedComponent } from './upvoted/upvoted.component';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -31,6 +32,7 @@ export function socialConfigs() {
     UserComponent,
     SubmittedComponent,
     ThreadsComponent,
+    UpvotedComponent,
   ],
   imports: [
     BrowserModule,
