@@ -1,36 +1,51 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { GoogleLoginProvider,  AuthService } from 'angularx-social-login';  
+import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';  
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { ContributionsComponent } from './contributions/contributions.component';
-import { CommentsComponent } from './comments/comments.component';
-import { UsersComponent } from './users/users.component';
+import { UserComponent } from './user/user.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { SubmittedComponent } from './submitted/submitted.component';
+import { ThreadsComponent } from './threads/threads.component';
 
+export function socialConfigs() {  
+  const config = new AuthServiceConfig(  
+    [  
+      {  
+        id: GoogleLoginProvider.PROVIDER_ID,  
+        provider: new GoogleLoginProvider('299702883008-3gor46cn1q6be1ihm4kskhve1nmf737e.apps.googleusercontent.com')  
+      }  
+    ]  
+  );  
+  return config;  
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ContributionsComponent,
-    CommentsComponent,
-    UsersComponent
-
-    
+    UserComponent,
+    SubmittedComponent,
+    ThreadsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    SocialLoginModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    AuthService,  
+    {  
+      provide: AuthServiceConfig,  
+      useFactory: socialConfigs  
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-
