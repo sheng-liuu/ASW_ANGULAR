@@ -7,6 +7,8 @@ import { UpvotedComponent } from './upvoted/upvoted.component';
 import { CommentDetailsComponent } from './comment-details/comment-details.component';
 import { UpvotedcommentComponent } from './upvotedcomment/upvotedcomment.component';
 import { ContributionDetailsComponent } from './contribution-details/contribution-details.component';
+import { ContributionsListComponent } from './contributions-list/contributions-list.component';
+
 
 const routes: Routes = [
   {path:  'user', component:  UserComponent},
@@ -16,6 +18,7 @@ const routes: Routes = [
   {path:  'upvoted', component: UpvotedComponent},
   {path:  'upvotedcomment', component: UpvotedcommentComponent},
   {path:  'contribution-details', component: ContributionDetailsComponent},
+  {path:  'contributions-list', component: ContributionsListComponent},
   ];
 
 @NgModule({
