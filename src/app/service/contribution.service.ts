@@ -54,7 +54,7 @@ export class ContributionService {
     'https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id, httpOptions);
   }
   
-  getContributions(nametype:string): Observable<Contribution[]> {
+  getContributions(nametype:String): Observable<Contribution[]> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',

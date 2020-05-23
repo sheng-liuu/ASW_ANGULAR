@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ContributionService } from '../service/contribution.service';
-import { Router } from '@angular/router';
+import { Router,  ActivatedRoute  } from '@angular/router';
 import { Contribution } from '../models/contribution';
+
 
 @Component({
   selector: 'app-contributions-list',
@@ -10,29 +11,22 @@ import { Contribution } from '../models/contribution';
 })
 export class ContributionsListComponent implements OnInit {
   items: Contribution[];
+  stringToSubmit: String;
   
   constructor(private contributionService: ContributionService,
-  private router: Router) { }
+  private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(nametype:string): void {
-    if (nametype == "ask")
-        this.contributionService.getContributions(nametype).subscribe(data => {
+  ngOnInit(): void {
+
+    this.route.params.subscribe(params => {
+      this.stringToSubmit = params.String;
+  });
+        this.contributionService.getContributions(this.stringToSubmit).subscribe(data => {
         console.log("Contributions ask sucessful");
-        this.items = data;
-        });
-    
-    elseif (nametype == "url")
-        this.contributionService.getContributions(nametype).subscribe(data => {
-        console.log("Contributions url sucessful");
-        this.items = data;
-        });
-  
-    else
-        this.contributionService.getContributions(nametype).subscribe(data => {
-        console.log("Contributions news sucessful");
         this.items = data;
         });
   }
     
+} 
 
-}
+

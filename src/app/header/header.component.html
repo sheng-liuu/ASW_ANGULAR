@@ -8,9 +8,9 @@
                 </td>
                 <td style="line-height:12pt; height:10px;">
                     <span class="pagetop">
-                        <b class="hnname"><a [routerLink] = "['/contribution-details', "url"]">Hacker News</a></b>
-                        <a [routerLink] = "['/contribution-list', ""]">newest</a> | 
-                        <a [routerLink] = "['/contribution-list', "ask"]">ask</a> | 
+                        <button [routerLink]="['/contribution-list', 'url']" >Hacker News</button>
+                            <button [routerLink]="['/contribution-list', '']" >newest</button>
+                            <button [routerLink]="['/contribution-list', 'ask']" >ask</button>
                         <a href="submit">submit</a>            
                     </span>
                 </td>
