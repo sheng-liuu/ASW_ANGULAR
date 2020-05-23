@@ -17,7 +17,7 @@ const routes: Routes = [
   {path:  'threads', component: ThreadsComponent},
   {path:  'upvoted', component: UpvotedComponent},
   {path:  'upvotedcomment', component: UpvotedcommentComponent},
-  {path:  'contribution-details', component: ContributionDetailsComponent},
+  {path:  'contribution-details/:id', component: ContributionDetailsComponent},
   {path:  'contributions-list', component: ContributionsListComponent},
   ];
 

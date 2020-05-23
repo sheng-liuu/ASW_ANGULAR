@@ -51,7 +51,7 @@ export class ContributionService {
       })
     };
     return this.http.get<Contribution>(
-    'https://hackernews12c.herokuapp.com/api/v1/contributions'+ id, httpOptions);
+    'https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id, httpOptions);
   }
   
   getContributions(nametype:string): Observable<Contribution[]> {
