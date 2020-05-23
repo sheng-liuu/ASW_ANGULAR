@@ -14,30 +14,25 @@ export class ContributionsListComponent implements OnInit {
   constructor(private contributionService: ContributionService,
   private router: Router) { }
 
-  ngOnInit(): void {
-  }   
+  ngOnInit(nametype:string): void {
+    if (nametype == "ask")
+        this.contributionService.getContributions(nametype).subscribe(data => {
+        console.log("Contributions ask sucessful");
+        this.items = data;
+        });
     
-  showAsks(){
-    const nametype = "ask";
-    this.contributionService.getContributions(nametype).subscribe(data => {
-      console.log("Contributions asks sucessful");
-      this.items = data;
-    });
-  }
+    elseif (nametype == "url")
+        this.contributionService.getContributions(nametype).subscribe(data => {
+        console.log("Contributions url sucessful");
+        this.items = data;
+        });
   
-  showNews(){
-    const nametype = "";
-    this.contributionService.getContributions(nametype).subscribe(data => {
-      console.log("Contributions news sucessful");
-      this.items = data;
-    });
+    else
+        this.contributionService.getContributions(nametype).subscribe(data => {
+        console.log("Contributions news sucessful");
+        this.items = data;
+        });
   }
-  
-  showUrls(){
-    const nametype = "url";
-    this.contributionService.getContributions(nametype).subscribe(data => {
-      console.log("Contributions main page sucessful");
-      this.items = data;
-    });
-  }
+    
+
 }

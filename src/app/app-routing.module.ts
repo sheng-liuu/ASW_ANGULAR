@@ -18,7 +18,7 @@ const routes: Routes = [
   {path:  'upvoted', component: UpvotedComponent},
   {path:  'upvotedcomment', component: UpvotedcommentComponent},
   {path:  'contribution-details/:id', component: ContributionDetailsComponent},
-  {path:  'contributions-list', component: ContributionsListComponent},
+  {path:  'contributions-list/:nametype', component: ContributionsListComponent},
   ];
 
 @NgModule({
