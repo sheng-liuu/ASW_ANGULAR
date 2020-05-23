@@ -1,0 +1,24 @@
+<table width="85%" style="color:gray"><div class="main-content">
+  <ol *ngIf="items!=null">
+    <li *ngFor="let item of items;" class="post">
+        <div *ngIf="item.nametype == 'url';else other_content">
+          <a [routerLink] = item.url >{{item.title}}</a>
+        </div>
+        <ng-template #other_content> item.title </ng-template>
+         
+        <table>
+            <tr>
+              <td>on: <a [routerLink] = "'/#'">{{item.points}}</a></td>
+              <td>by <a [routerLink] = "'/user'">{{item.user_id}}</a></td>
+              <td><a [routerLink] = "'/#'">{{item.created_at}}</a> ago | </td>
+            </tr>
+            <tr>
+              <div *ngIf="item.nametype == 'ask'">
+                <td>{{item.text}}</td>
+              </div>
+            </tr>
+        </table>
+        
+    </li>
+  </ol>
+</div></table>
