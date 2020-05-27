@@ -26,6 +26,10 @@ export class ContributionsListComponent implements OnInit {
         this.items = data;
         });
   }
+  
+  vote() :void{
+    this.contributionService.postVote(number id)
+  }
     
 } 
 

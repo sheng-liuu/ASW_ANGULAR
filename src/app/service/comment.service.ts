@@ -36,6 +36,7 @@ export class CommentService {
         'Accept': 'application/json'
       })
     };
+
     return this.http.get<Comment[]>(
     'https://hackernews12c.herokuapp.com/api/v1/user/upvotedcomment', httpOptions);
   }
