@@ -15,14 +15,14 @@ export class ContributionDetailsComponent implements OnInit {
   private router: Router) { }
 
   ngOnInit(): void {
-
+    
   }
   
   showContribution(id:number){
-    this.contributionService.getContribution(id).subscribe(data => {
-      console.log("UpvotedComment sucessful");
-      this.item = data;
-    });
-  }
+      this.contributionService.getContribution(id).subscribe(data => {
+        console.log("UpvotedComment sucessful");
+        this.item = data;
+      });
+    }
 
 }
