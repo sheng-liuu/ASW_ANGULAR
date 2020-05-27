@@ -13,7 +13,7 @@ export class ContributionsNewestComponent implements OnInit {
   constructor(private contributionService: ContributionService, private router: Router) {}
 
   ngOnInit(): void {
-    this.contributionService.getUrl().subscribe(data => {
+    this.contributionService.getContributions().subscribe(data => {
       console.log("Url sucessful");
       this.items = data;
     });
