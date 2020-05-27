@@ -27,8 +27,17 @@ export class ContributionsListComponent implements OnInit {
         });
   }
   
-  vote() :void{
-    this.contributionService.postVote(number id)
+  vote(id: number) :void{
+    this.contributionService.postVote(id).subscribe(data => {
+      this.router.navigateByUrl('/contributions');
+      console.log("Voted sucessful");
+    });
+    
+  }
+  
+  canVote(item: Contribution){
+    if(localStorage.getItem("id") != item.user_id && item.voted) return true;
+    else return false;
   }
     
 } 
