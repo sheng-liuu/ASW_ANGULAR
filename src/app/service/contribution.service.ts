@@ -53,6 +53,7 @@ export class ContributionService {
     return this.http.get<Contribution[]>(
     'https://hackernews12c.herokuapp.com/api/v1/contributions?nametype=ask', httpOptions);
   }
+  
   getContribution(id): Observable<Contribution> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -65,7 +66,7 @@ export class ContributionService {
     'https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id, httpOptions);
   }
   
-  getContributions(nametype:String): Observable<Contribution[]> {
+  getContributions(): Observable<Contribution[]> { //all
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -73,10 +74,7 @@ export class ContributionService {
         'Accept': 'application/json'
       })
     };
-    if (nametype == null) 
-      return this.http.get<Contribution[]>('https://hackernews12c.herokuapp.com/api/v1/contributions', httpOptions);
-    else
-      return this.http.get<Contribution[]>('https://hackernews12c.herokuapp.com/api/v1/contributions?nametype=' + nametype, httpOptions);
+    return this.http.get<Contribution[]>('https://hackernews12c.herokuapp.com/api/v1/contributions', httpOptions);
   }
 
   postContribution(contribution: Contribution): Observable<Contribution> {
@@ -92,6 +90,8 @@ export class ContributionService {
     'https://hackernews12c.herokuapp.com/api/v1/contributions', contribution, httpOptions);
   }
   postVote(id:number): void {
+  
+  getUrl(): Observable<Contribution[]> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -99,6 +99,17 @@ export class ContributionService {
         'Accept': 'application/json'
       })
     };
-      this.http.post('https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id +'/vote', httpOptions);
+    return this.http.get<Contribution[]>('https://hackernews12c.herokuapp.com/api/v1/contributions?nametype=url', httpOptions);
+  }
+
+  postVote(id:number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'X-API-KEY': localStorage.getItem("apikey"),
+        'Accept': 'application/json'
+      })
+    };
+    return this.http.post<any>('https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id +'/vote',null, httpOptions);
   }
 }

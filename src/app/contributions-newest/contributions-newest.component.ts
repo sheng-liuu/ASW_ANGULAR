@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ContributionService } from '../service/contribution.service';
 
 @Component({
   selector: 'app-contributions-newest',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contributions-newest.component.css']
 })
 export class ContributionsNewestComponent implements OnInit {
+ items;
 
-  constructor() { }
+  constructor(private contributionService: ContributionService, private router: Router) {}
 
   ngOnInit(): void {
+    this.contributionService.getContributions().subscribe(data => {
+      console.log("Url sucessful");
+      this.items = data;
+    });
   }
 
 }

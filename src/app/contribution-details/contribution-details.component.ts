@@ -12,12 +12,16 @@ import { Comment } from '../models/comment';
 export class ContributionDetailsComponent implements OnInit {
   public item: Contribution;
   comment: Comment;
+  idContribution: number;
 
   constructor(private contributionService: ContributionService,
   private router: Router) { }
 
   ngOnInit(): void {
-
+      this.route.params.subscribe(params => {
+-      this.idContribution = params.number;
+-  });
+    showContribution();
   }
   onSubmit() {
 
@@ -28,5 +32,6 @@ export class ContributionDetailsComponent implements OnInit {
       this.item = data;
     });
   }
+
 
 }
