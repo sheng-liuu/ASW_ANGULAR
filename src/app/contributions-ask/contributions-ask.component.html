@@ -1,7 +1,7 @@
 <table width="85%" style="color:gray"><div class="main-content">
     <ol *ngIf="items!=null">
       <li *ngFor="let item of items; let i = index" class="post">
-        <a class="image-item">
+        <a (click)="vote(item.id)" *ngIf="canVote(item)">
           <img src="assets/vote.png" style="width:10px;height:10px">
         </a>
         <table>

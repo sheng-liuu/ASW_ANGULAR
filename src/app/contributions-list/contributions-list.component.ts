@@ -34,7 +34,4 @@ export class ContributionsListComponent implements OnInit {
     if(localStorage.getItem("id") != item.user_id && item.voted == false) return true;
     else return false;
   }
-    
-} 
-
-
+}

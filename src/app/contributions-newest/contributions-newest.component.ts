@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContributionService } from '../service/contribution.service';
+import { Contribution } from '../models/contribution';
 
 @Component({
   selector: 'app-contributions-newest',
@@ -17,6 +18,11 @@ export class ContributionsNewestComponent implements OnInit {
       console.log("Url sucessful");
       this.items = data;
     });
+  }
+  
+  canVote(item: Contribution){
+    if(localStorage.getItem("id") != item.user_id && item.voted == false) return true;
+    else return false;
   }
 
 }
