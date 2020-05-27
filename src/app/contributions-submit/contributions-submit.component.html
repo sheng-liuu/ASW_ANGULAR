@@ -1,16 +1,16 @@
  <tr style="height:10px"></tr>
-            <form #ContributionForm="ngForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
                 <table border="0">
                   <tr>
                     <td><font color="grey">title</font></td>
                     <td>
-                      <input type="text" name="contribution[title]"  [(ngModel)]="item.title"  size="50">
+                      <input type="text" formControlName="title" size="50">
                       <span style="margin-left:10px"></span>
                     </td>
                   </tr>
                   <tr>
                     <td><font color="grey">url</font></td>
-                    <td><input type="text" name="contribution[url]" [(ngModel)]="item.url"size="50"></td>
+                    <td><input type="text" formControlName="url" size="50"></td>
                   </tr>
                   <tr>
                     <td></td>
@@ -18,7 +18,7 @@
                   </tr>
                   <tr>
                     <td><font color="grey">text</font></td>
-                    <td><textarea [(ngModel)]= "item.text" name="contribution[text]" rows="4" cols="49"></textarea>
+                    <td><textarea formControlName="text" rows="4" cols="49"></textarea>
                     </td>
                 </tr>
                 <tr>
