@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContributionService } from '../service/contribution.service';
 import { Router } from '@angular/router';
 import { Contribution } from '../models/contribution';
+import { Comment } from '../models/comment';
 
 @Component({
   selector: 'app-contribution-details',
@@ -9,7 +10,8 @@ import { Contribution } from '../models/contribution';
   styleUrls: ['./contribution-details.component.css']
 })
 export class ContributionDetailsComponent implements OnInit {
-  item: Contribution;
+  public item: Contribution;
+  comment: Comment;
 
   constructor(private contributionService: ContributionService,
   private router: Router) { }
@@ -17,7 +19,9 @@ export class ContributionDetailsComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  
+  onSubmit() {
+
+  }
   showContribution(id:number){
     this.contributionService.getContribution(id).subscribe(data => {
       console.log("UpvotedComment sucessful");

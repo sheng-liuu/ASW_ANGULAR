@@ -28,7 +28,7 @@ export class ContributionsListComponent implements OnInit {
   }
   
   vote() :void{
-    this.contributionService.postVote(number id)
+  
   }
     
 } 

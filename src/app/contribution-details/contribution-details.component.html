@@ -17,6 +17,14 @@
           </div>
         </tr>
       </table>
-        
+        <table>
+          <form (ngSubmit)="onSubmit()">
+            <div class="col-10">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                [(ngModel)]="comment.content" name="first"></textarea>
+            </div>
+            <button type="submit" id="btnSave" class="btn btn-primary">Update</button>
+          </form>
+        </table>
   </ol>
 </div></table>
