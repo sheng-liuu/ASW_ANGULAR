@@ -10,16 +10,20 @@ import { Contribution } from '../models/contribution';
 })
 export class ContributionDetailsComponent implements OnInit {
   item: Contribution;
+  idContribution: number;
 
   constructor(private contributionService: ContributionService,
   private router: Router) { }
 
   ngOnInit(): void {
-
+      this.route.params.subscribe(params => {
+-      this.idContribution = params.number;
+-  });
+    showContribution();
   }
   
-  showContribution(id:number){
-    this.contributionService.getContribution(id).subscribe(data => {
+  showContribution(){
+    this.contributionService.getContribution(idContribution).subscribe(data => {
       console.log("UpvotedComment sucessful");
       this.item = data;
     });
