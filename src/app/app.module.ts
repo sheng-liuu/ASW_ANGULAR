@@ -17,6 +17,8 @@ import { UpvotedcommentComponent } from './upvotedcomment/upvotedcomment.compone
 import { ContributionDetailsComponent } from './contribution-details/contribution-details.component';
 import { ContributionsListComponent } from './contributions-list/contributions-list.component';
 import { CommentsListComponent } from './comments-list/comments-list.component';
+import { ContributionsSubmitComponent } from './contributions-submit/contributions-submit.component';
+import { ContributionsAskComponent } from './contributions-ask/contributions-ask.component';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -43,6 +45,8 @@ export function socialConfigs() {
     ContributionDetailsComponent,
     ContributionsListComponent,
     CommentsListComponent,
+    ContributionsSubmitComponent,
+    ContributionsAskComponent,
   ],
   imports: [
     BrowserModule,
