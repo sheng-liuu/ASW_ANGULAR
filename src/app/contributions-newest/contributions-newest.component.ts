@@ -20,8 +20,29 @@ export class ContributionsNewestComponent implements OnInit {
     });
   }
   
+  vote(id: number) :void{
+    this.contributionService.postVote(id).subscribe(data => {
+      this.router.navigateByUrl('/contributions');
+      console.log("Voted sucessful");
+    });
+    
+  }
+  
+  unvote(id: number) :void{
+    this.contributionService.postUnvote(id).subscribe(data => {
+      this.router.navigateByUrl('/contributions');
+      console.log("Unvoted sucessful");
+    });
+    
+  }
+  
   canVote(item: Contribution){
     if(localStorage.getItem("id") != item.user_id && item.voted == false) return true;
+    else return false;
+  }
+  
+  canUnvote(item: Contribution){
+    if(localStorage.getItem("id") != item.user_id && item.voted == true) return true;
     else return false;
   }
 

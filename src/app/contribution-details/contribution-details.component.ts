@@ -16,7 +16,7 @@ export class ContributionDetailsComponent implements OnInit {
   private router: Router) { }
 
   ngOnInit(): void {
-      this.route.params.subscribe(params => {
+  /*    this.router.params.subscribe(params => {
 -      this.idContribution = params.number;
 -  });
     showContribution();
@@ -26,7 +26,7 @@ export class ContributionDetailsComponent implements OnInit {
     this.contributionService.getContribution(idContribution).subscribe(data => {
       console.log("UpvotedComment sucessful");
       this.item = data;
-    });
+    });*/
   }
 
 
