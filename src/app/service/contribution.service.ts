@@ -78,4 +78,15 @@ export class ContributionService {
     else
       return this.http.get<Contribution[]>('https://hackernews12c.herokuapp.com/api/v1/contributions?nametype=' + nametype, httpOptions);
   }
+  
+  postVote(id:number): void {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'X-API-KEY': localStorage.getItem("apikey"),
+        'Accept': 'application/json'
+      })
+    };
+      this.http.post('https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id +'/vote', httpOptions);
+  }
 }

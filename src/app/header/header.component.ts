@@ -11,6 +11,7 @@ import { User } from '../models/user';
 })
 export class HeaderComponent implements OnInit {
   public localUser: User;
+  private user: SocialUser
   private loggedIn: boolean;
   
   constructor(private userService: UserService,
@@ -44,6 +45,10 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      localStorage.setItem("username", user.name);
+    }, (error) => console.log(error));
   }
 
 }

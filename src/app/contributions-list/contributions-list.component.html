@@ -1,10 +1,13 @@
 <table width="85%" style="color:gray"><div class="main-content">
   <ol *ngIf="items!=null">
     <li *ngFor="let item of items;" class="post">
+        <a class="navbar-item">
+          <img src="assets/vote.png" style="width:10px;height:10px">
+        </a>
         <div *ngIf="item.nametype == 'url';else other_content">
           <a [routerLink] = item.url >{{item.title}}</a>
         </div>
-        <ng-template #other_content> item.title </ng-template>
+        <ng-template #other_content> {{item.title}} </ng-template>
          
         <table>
             <tr>
