@@ -11,17 +11,12 @@ import { Contribution } from '../models/contribution';
 })
 export class ContributionsListComponent implements OnInit {
   items: Contribution[];
-  stringToSubmit: String;
   
   constructor(private contributionService: ContributionService,
   private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-
-    this.route.params.subscribe(params => {
-      this.stringToSubmit = params.String;
-  });
-        this.contributionService.getContributions(this.stringToSubmit).subscribe(data => {
+        this.contributionService.getUrl().subscribe(data => {
         console.log("Contributions ask sucessful");
         this.items = data;
         });
@@ -36,7 +31,7 @@ export class ContributionsListComponent implements OnInit {
   }
   
   canVote(item: Contribution){
-    if(localStorage.getItem("id") != item.user_id && item.voted) return true;
+    if(localStorage.getItem("id") != item.user_id && item.voted == false) return true;
     else return false;
   }
     

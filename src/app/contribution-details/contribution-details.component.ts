@@ -29,4 +29,5 @@ export class ContributionDetailsComponent implements OnInit {
     });
   }
 
+
 }
