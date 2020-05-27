@@ -5,7 +5,7 @@ export class Contribution {
   text: string;
   points: number;
   nametype: string;
-  user_id: number;
+  user_id: string;
   voted: boolean;
   created_at: string;
 }

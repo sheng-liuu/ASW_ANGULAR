@@ -25,7 +25,9 @@ export class HeaderComponent implements OnInit {
         this.loggedIn = (user != null);
         this.userService.login(user).subscribe(n => {
           if(n != null) {
+            localStorage.setItem("id", n.id);
             localStorage.setItem("apikey", n.api_key);
+            
             this.localUser = n;
           }
         });
