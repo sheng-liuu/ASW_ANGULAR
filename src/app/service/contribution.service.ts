@@ -89,7 +89,7 @@ export class ContributionService {
     return this.http.post<Contribution>(
     'https://hackernews12c.herokuapp.com/api/v1/contributions', contribution, httpOptions);
   }
-  postVote(id:number): void {
+
   
   getUrl(): Observable<Contribution[]> {
     const httpOptions = {

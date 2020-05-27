@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContributionService } from '../service/contribution.service';
-import { Router } from '@angular/router';
+import { Router,  ActivatedRoute  } from '@angular/router';
 import { Contribution } from '../models/contribution';
 import { Comment } from '../models/comment';
 
@@ -15,22 +15,19 @@ export class ContributionDetailsComponent implements OnInit {
   idContribution: number;
 
   constructor(private contributionService: ContributionService,
-  private router: Router) { }
+  private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
       this.route.params.subscribe(params => {
--      this.idContribution = params.number;
--  });
-    showContribution();
+    this.idContribution = params.number;
+  });
+  this.contributionService.getContribution(this.idContribution).subscribe(data => {
+    console.log("UpvotedComment sucessful");
+    this.item = data;
+  });
   }
   onSubmit() {
 
-  }
-  showContribution(id:number){
-    this.contributionService.getContribution(id).subscribe(data => {
-      console.log("UpvotedComment sucessful");
-      this.item = data;
-    });
   }
 
 
