@@ -19,9 +19,9 @@
                     </td>
                 <td style="text-align:right;padding-right:4px;">
                     <span class="pagetop">
-                        <a *ngIf = "localUser!=null" [routerLink] = "['/user', localUser.name]">{{localUser.name}}</a> &nbsp;
-                        <button (click)="signInWithGoogle()" *ngIf = "localUser==null">Login</button>
-                        <button (click)="signOut()" *ngIf = "localUser!=null">LogOut</button>
+                        <a *ngIf = "loggedIn" [routerLink] = "['/user', user.name]">{{user.name}}</a> &nbsp;
+                        <button (click)="signInWithGoogle()" *ngIf = "!loggedIn">Login</button>
+                        <button (click)="signOut()" *ngIf = "loggedIn">LogOut</button>
                     </span>
                 </td>
              </tr>
