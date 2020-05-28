@@ -20,6 +20,7 @@ import { CommentsListComponent } from './comments-list/comments-list.component';
 import { ContributionsSubmitComponent } from './contributions-submit/contributions-submit.component';
 import { ContributionsAskComponent } from './contributions-ask/contributions-ask.component';
 import { ContributionsNewestComponent } from './contributions-newest/contributions-newest.component';
+import { CommentBasicComponent } from './comment-basic/comment-basic.component';
 
 export function socialConfigs() {  
   const config = new AuthServiceConfig(  
@@ -49,6 +50,7 @@ export function socialConfigs() {
     ContributionsSubmitComponent,
     ContributionsAskComponent,
     ContributionsNewestComponent,
+    CommentBasicComponent,
   ],
   imports: [
     BrowserModule,

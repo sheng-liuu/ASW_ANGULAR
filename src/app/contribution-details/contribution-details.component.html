@@ -27,7 +27,8 @@
         <table>
         <ol *ngIf="comments!=null">
           <li *ngFor="let comment of comments;" class="post">
-              <tr>
+            <app-comment-basic [comment]="comment"></app-comment-basic>
+<tr>
                 <td>
                   <a (click)="vote2(comment.id)" *ngIf="canVote2(comment)">
                     <img src="assets/vote.png" style="width:10px;height:10px">
