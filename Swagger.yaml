@@ -1,0 +1,695 @@
+openapi: 3.0.1
+
+info:
+  version: 1.0.0
+  title: HackerNews
+  description: Grup 12 C
+  contact:
+    name: REST API Hacker News (Bitbucket)
+    url: 'https://bitbucket.org/arivc/asw-hackernews/src/master/'
+
+servers:
+  - url: 'https://hackernews12c.herokuapp.com/'
+  - url: 'http://3.89.92.83:8080'
+    variables: {}
+security:
+  - ApiKeyAuth: []
+paths:
+  /api/v1/contributions:
+   post:
+      description: Se creara una nueva contribution que tendra los valores escritos en el esquema, donde se requerira un titulo y un user_id
+      tags:
+      - Contributions 
+      summary: Nueva contribution
+      operationId: addContribution
+      requestBody:
+        description: Escribe el autor y el titulo de la contribution
+        content:
+          application/json:
+            schema:
+              required:
+              - title
+              
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 1
+                url:
+                  type: string
+                  minLength: 1
+                text:
+                  type: string
+                  minLength: 1
+                
+              example:
+              -
+                title: "Title of question"
+                url: ""
+                text: "How can I?"
+    
+        required: true
+      responses:
+        200:
+          description: Contribution exist
+          content:
+            application/json:
+             schema:
+                $ref: '#/components/schemas/Contribution'
+        201:
+          description: Contribution created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contribution'
+        400:
+          description: Conflict on creating contribution. It can't have text and url
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error400'
+        401:
+          description: Unauthorized user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        409:
+          description: Conflict url and text
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+   get:
+      description: Obtendremos los diferentes tipos de contributions dependiendo del valor que se escriba en el query, podran ser todas, las tipo "ask" y las tipo "url"
+      tags:
+        - Contributions
+      summary: Obtener todas las contributions
+      parameters:
+      - name: nametype
+        in: query
+        description: Tipo de contribution ("ask" o "url")
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contribution'
+  /api/v1/contributions/{id}:
+    get:
+      description: Obtendremos una contribution especifica que dependera de la id proporcionada
+      tags:
+      - Contributions
+      summary: Obtener una contribution específica
+      parameters:
+      - name: id
+        in: path
+        description: ID of the contribution
+        required: true
+        schema:
+          type: integer
+          format: int64
+
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+             schema:
+                $ref: '#/components/schemas/Contribution'
+     
+        404:
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+  /api/v1/contributions/{id}/comments:
+    get:
+      description: Obtendremos un comment especifico que dependera de la id proporcionada
+      tags:
+      - Contributions
+      summary: Obtener un comment especifico
+      parameters:
+      - name: id
+        in: path
+        description: id de la contribution
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        404:
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'  
+  /api/v1/contributions/{id}/vote:
+    post:
+      description: Se votara una contribution especifica que dependera de la id proporcionada
+      tags:
+        - Contributions
+      summary: Votar una contribution
+      parameters:
+        - name: id
+          in: path
+          description:  id de la contribution
+          required: true
+          schema:
+            type: number
+            format: int
+     
+      responses:
+        '200':
+          description: Voted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      description: Desvotaremos una contribution especifica a través del id que se proporciona
+      tags:
+        - Contributions
+      summary: Desvotar una contribution
+      operationId: unvoteContribution
+      parameters:
+        - name: id
+          in: path
+          description: id de la contribution
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Unvoted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/comments:
+    post:
+      description: Se publicara un nuevo comment en Hacker News, donde se tendra que especificar el id de la contribution que se va a comentar, el contenido del comment y el user_id
+      tags:
+      - Comments
+      summary: Nuevo Comment en Hacker News
+      operationId: addComment
+      requestBody:
+        description: Provide the author & content of the new Tweet
+        content:
+          application/json:
+            schema:
+              required:
+              - content
+              - user_id
+              - contribution_id
+              type: object
+              properties:
+                content:
+                  type: string
+                  minLength: 1
+                  example: 'My content Swagger'
+                user_id:
+                  type: number
+                  format: int
+                  example: '1'
+                contribution_id:
+                  type: number
+                  format: int
+                  example: '1'
+                comment_id:
+                  type: number
+                  format: int
+                  example: '8'
+        required: true
+      responses:
+        201:
+          description: Comment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        400:
+          description: 'Contribution or User or Comment not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error400'
+  /api/v1/comments/{id}:
+    get:
+      description: Obtendremos un comment especifico que dependera del id proporcionado
+      tags:
+        - Comments
+      summary: Obtener un comment especifico
+      parameters:
+        - name: id
+          in: path
+          description: id del comment
+          required: true
+          schema:
+            type: number
+            format: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+  /api/v1/comments/{id}/replies:
+    get:
+      description: Obtendremos los replies de un comment especifico
+      tags:
+      - Comments
+      summary: Obtener replies de un comment
+      parameters:
+      - name: id
+        in: path
+        description: id del comment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        404:
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'               
+  /api/v1/comments/{id}/vote:
+    post:
+      description: Se votara un comment especifico que dependera del id proporcionado
+      tags:
+        - Comments
+      summary: Votar a un comment
+      parameters:
+        - name: id
+          in: path
+          description: id del comment
+          required: true
+          schema:
+            type: number
+            format: integer
+      responses:
+        '200':
+          description: Voted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      description: Se desvotara un comment especifico que dependera del id proporcionado
+      tags:
+        - Comments
+      summary: Desvotar un comment
+      operationId: unvoteComment
+      parameters:
+        - name: id
+          in: path
+          description: id del comment
+          required: true
+          schema:
+            type: number
+            format: integer
+      responses:
+        '200':
+          description: OK
+        '302':
+          description: Unvoted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/v1/login:
+    post:
+      description: login 
+      tags:
+      - User 
+      requestBody:
+        description: Escribe el username y el email del usuario
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                email:
+                  type: string
+                  minLength: 1
+                
+              example:
+              -
+                name: "UserName"
+                email: "user@gmail.com"
+    
+        required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        '401':
+          description: Unauthorized user
+        '404':
+          description: User not found
+  /api/v1/user:
+    get:
+      description: Se obtendra la informacion de un usuario especifico que dependera del nombre proporcionado
+      tags:
+        - User
+      summary: Obtener un usuario
+      parameters:
+       - name: id
+         in: query
+         description: Nombre de usuario que quieres obtener
+         required: true
+         schema:
+           type: string
+           
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        '401':
+          description: Unauthorized user
+        '404':
+          description: User not found
+          
+    patch:
+      description: Actualiza el contenido del campo about de la cuenta que se encuentra actualmente logeada
+      tags:
+        - User
+      summary: Modificar datos de usuario
+      operationId: updateUser
+      requestBody:
+        description: El nuevo contenido del campo "about"
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - about
+              type: object
+              properties:
+                about:
+                  type: string
+      responses:
+        '200':
+          description: Successful respoonse
+        '401':
+          description: Unauthorized user
+        '404':
+          description: User not found
+  /api/v1/user/{id}/submitted:
+    get:
+      description: Obtener las contribuciones que ha creado un usuario especifico a traves de la user name proporcionada
+      tags:
+        - User
+      summary: Obtener contributions del user
+      parameters:
+       - name: id
+         in: path
+         required: true
+         description: Nombre de usuario
+         schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contribution'
+        '401':
+          description: Unauthorized user
+        '404':
+          description: User not found
+  /api/v1/user/{id}/threads:
+    get:
+      description: Obtener los comentarios que ha enviado un usuario especifico a traves del user name proporcionado
+      tags:
+        - User
+      summary: Obtener comments del user
+      parameters:
+       - name: id
+         in: path
+         required: true
+         description: Nombre de usuario
+         schema:
+          type: string
+          
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '401':
+          description: Unauthorized user
+        '404':
+          description: User not found
+  /api/v1/user/upvoted:
+    get:
+      description: Obtener las contribuciones que ha votado el usuario logeado
+      tags:
+        - User
+      summary: Obtener las contributions votadas
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contribution'
+        '401':
+          description: Unauthorized user
+        '404':
+          description: User not found
+  /api/v1/user/upvotedcomment:
+    get:
+      description: Obtener los comentarios que ha votado el usuario logeado
+      tags:
+        - User
+      summary: Obtener los comments votados
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '401':
+          description: Unauthorized user
+        '404':
+          description: User not found
+components:
+  schemas:
+    Contribution:
+      type: object
+      properties:
+        id:
+          type: number
+          format: integer
+          description: Unique identifier representing specific contribution
+        title:
+          type: string
+          description: Brief text from the header of the contribution
+        content:
+          type: string
+          description: Main body of the contribution. It can be a url or a text
+        created_at:
+          type: string
+          format: date
+          description: Date when the contribution was created
+        user:
+          $ref: "#/components/schemas/Users"
+        comments: 
+          allOf:
+            - $ref: '#/components/schemas/Comment'
+            - type: object
+          description: Number of comments the contribution has
+        punctuation:
+          type: number
+          format: int
+          description: Number of votes the contribution has
+      example:
+        id: 1
+        title: "I love bits"
+        content: "http://www.fib.upc.edu/fib.html"
+        created_at: "2016-11-23T11:30:25"
+        user:
+          url: "/users/3"
+        comments: 0
+        punctuation: 0
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier representing specific comment
+        content:
+          type: string
+          description: Main body of the comment
+        created_at:
+          type: string
+          format: date-time
+          description: Date when the comment was created
+        user:
+          $ref: "#/components/schemas/Users"
+        contribution:
+          $ref: '#/components/schemas/Contribution'
+        comment:
+          $ref: '#/components/schemas/Comment'
+        punctuation:
+          type: number
+          format: int
+          description: Number of votes the contribution has
+      example:
+        id: 1
+        content: "You are wrong"
+        created_at: "2016-11-23T11:30:25"
+        user:
+          url: "/users/3"
+        comments: 0
+        punctuation: 0
+    Users:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int
+          description: Unique identifier representing specific user
+        name:
+          type: string
+          description: User's name and surname
+        about:
+          type: string
+          description: Little description about the user
+        created_at:
+          type: string
+          format: date
+          description: Date when the user was created
+      example:
+        id: 1
+        name: "Pepito Menganito"
+        about: "Be like me"
+        created_at: "2016-05-23T15:14:52"
+    ErrorResult:
+      type: object
+      properties:
+        status:
+          type: integer
+          enum: [400, 401, 403, 404, 409]
+        error: 
+          type: string
+          enum: ["Bad Request", "Unauthorized", "Forbidden", "Not Found", "Conflict"]
+        message: 
+          type: string
+  examples:
+    error400:
+      value:
+        status: 400
+        error: Bad Request
+        message: Parameters are wrong
+    error401:
+      value:
+        status: 401
+        error: Unauthorized
+        message: You provided no api key (X-API-KEY Header)
+    error403:
+      value:
+        status: 403
+        error: Forbidden
+        message: Your api key (X-API-KEY Header) is not valid
+    error404:
+      value:
+        status: 404
+        error: Not Found
+        message: No Comment with that ID
+    error409:
+      value:
+        status: 409
+        error: Conflict
+        message: Url and text with content
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-KEY #Custom headers in rails apps must have the X- prefix
+      in: header
