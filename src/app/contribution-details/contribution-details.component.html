@@ -4,7 +4,7 @@
       <div *ngIf="item.nametype == 'url';else other_content">
         <a [routerLink]=item.url>{{item.title}}</a>
       </div>
-      <ng-template #other_content> item.title </ng-template>
+      <ng-template #other_content> {{item.title}} </ng-template>
 
       <table>
         <tr>
@@ -38,8 +38,6 @@
                   <div>
                     <td> {{comment.content}} </td>
                   </div>
-                 <td> <app-comment-basic [comment]="comment"></app-comment-basic> </td>
-
               </table>
               <table>
                 <tr>
@@ -48,6 +46,7 @@
                   </div>
                 </tr>
               </table>
+              <tr> <app-comment-basic [comment]="comment"></app-comment-basic> </tr>
             </li>
 </ol>
         </table>

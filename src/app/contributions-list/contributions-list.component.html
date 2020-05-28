@@ -1,6 +1,7 @@
 <table width="85%" style="color:gray"><div class="main-content">
   <ol *ngIf="items!=null">
 <tr>
+  <table>
   <li *ngFor="let item of items;" class="post">
          <a (click)="vote(item.id)" *ngIf="canVote(item)">
             <img src="assets/vote.png" style="width:10px;height:10px">
@@ -8,7 +9,7 @@
         <a *ngIf="item.nametype == 'url';else other_content">
           <a style="color: #828282" href="{{item.url}}">({{item.title}})</a>
         </a>
-
+        <tr>
         <ng-template #other_content> {{item.title}} </ng-template>
               <td>{{item.points}} points by </td>
               <td><a [routerLink] = "['/user', item.user_name]">{{item.user_name}}</a></td>
@@ -21,6 +22,7 @@
               </div>
             </tr>
     </li>
+  </table>
   </tr>
   </ol>
 </div></table>
