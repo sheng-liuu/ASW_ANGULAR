@@ -17,14 +17,14 @@
           </div>
         </tr>
       </table>
-        <table>
+      
           <form [formGroup]="createForm"  (ngSubmit)="onSubmit()">
             <div class="col-10">
               <textarea class="form-control"  formControlName="content"></textarea>
             </div>
             <button type="submit" >Update</button>
           </form>
-        </table>
+        
         <table>
           <ol *ngIf="comments!=null">
             <li *ngFor="let comment of comments;" class="post">
