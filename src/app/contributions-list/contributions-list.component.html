@@ -5,7 +5,7 @@
           <img src="assets/vote.png" style="width:10px;height:10px">
         </a>
         <div *ngIf="item.nametype == 'url';else other_content">
-          <a [routerLink] = item.url >{{item.title}}</a>
+          <a style="color: #828282" href="{{item.url}}">({{item.title}})</a>
         </div>
         <ng-template #other_content> {{item.title}} </ng-template>
          
