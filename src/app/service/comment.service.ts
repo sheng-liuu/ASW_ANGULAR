@@ -4,7 +4,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SocialUser } from 'angularx-social-login';
 import { CommentDTO } from '../models/commentDTO';
-
+import { Comment } from '../models/comment';
 
 @Injectable({
   providedIn: 'root'

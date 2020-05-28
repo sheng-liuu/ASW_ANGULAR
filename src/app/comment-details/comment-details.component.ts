@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommentService } from '../service/comment.service';
+import { Comment } from '../models/comment';
 
 @Component({
   selector: 'app-comment-details',
@@ -8,16 +9,21 @@ import { CommentService } from '../service/comment.service';
   styleUrls: ['./comment-details.component.css']
 })
 export class CommentDetailsComponent implements OnInit {
-
-  items;
+  item: Comment;
+  idComment: number;
 
   constructor(private commentService: CommentService,
-  private router: Router) { }
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.commentService.getCommentDetails(3).subscribe(data => {
+    this.route.params.subscribe(params => {
+      this.idComment = params.id;
+      console.log(this.idComment)
+    });
+
+    this.commentService.getCommentDetails(this.idComment).subscribe(data => {
       console.log("Comment sucessful");
-      this.items = data;
+      this.item = data;
     });
   }
 }
