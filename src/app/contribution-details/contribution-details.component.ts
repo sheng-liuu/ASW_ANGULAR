@@ -16,7 +16,7 @@ import { UserService } from '../service/user.service';
 })
 export class ContributionDetailsComponent implements OnInit {
   public item: Contribution;
-  public  comment: Comment;
+  public comment: Comment;
   public idContribution: number;
   public idUser: String;
   public idComment: number;
@@ -33,8 +33,8 @@ export class ContributionDetailsComponent implements OnInit {
       this.route.params.subscribe(params => {
     this.idContribution = params.id;
     console.log(this.idContribution)
+      });
 
-  });
   this.contributionService.getContribution(this.idContribution).subscribe(data => {
     console.log("Show contribution sucessful");
     this.item = data;

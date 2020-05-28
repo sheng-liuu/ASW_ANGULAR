@@ -24,29 +24,29 @@
             </div>
             <button type="submit" >Add Comment</button>
           </form>
-        <table>
-        <ol *ngIf="comments!=null">
-          <li *ngFor="let comment of comments;" class="post">
+          <table>
+            <ol *ngIf="comments!=null">
+              <li *ngFor="let comment of comments;" class="post">
+            <tr>
+              <td>
+                <a (click)="vote2(comment.id)" *ngIf="canVote2(comment)">
+                  <img src="assets/vote.png" style="width:10px;height:10px">
+                </a>
+              </td>
+              <td> <a [routerLink]="'/user'">{{comment.user_name}} </a></td>
+              <td><a [routerLink]="['/comment-details', comment.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> |
+              <td>
+              <td> <a (click)="unvote2(comment.id)" *ngIf="canUnvote2(comment)">unvote |</a> </td>
+            </tr>
+            <table>
+              <tr>
+                <div>
+                  <td> {{comment.content}} </td>
+                </div>
+            </table>
             <app-comment-basic [comment]="comment"></app-comment-basic>
-<tr>
-                <td>
-                  <a (click)="vote2(comment.id)" *ngIf="canVote2(comment)">
-                    <img src="assets/vote.png" style="width:10px;height:10px">
-                  </a>
-                </td>
-                <td> <a [routerLink]="'/user'">{{comment.user_name}} </a></td>
-                <td><a [routerLink]="['/comment-details', comment.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> | <td>
-                <td> <a (click)="unvote2(comment.id)" *ngIf="canUnvote2(comment)">unvote |</a> </td>
-              <!--{{comment.id}}-->
-              </tr>
-              <table>
-                <tr>
-                  <div>
-                    <td> {{comment.content}} </td>
-                  </div>
-              </table>
             </li>
-          </ol>
+</ol>
         </table>
   </ol>
 </div></table>

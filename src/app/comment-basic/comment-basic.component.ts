@@ -9,10 +9,41 @@ import { Comment } from '../models/comment';
 })
 export class CommentBasicComponent implements OnInit {
   @Input() comment: Comment;
+  public replies: Comment[];
 
-  constructor() { }
+  constructor(private commentService: CommentService) { }
 
   ngOnInit(): void {
+    this.commentService.getReplies(this.comment.id).subscribe(data => {
+      console.log("Comments sucessful");
+      this.replies = data;
+    });
+  }
+
+  vote2(id: number): void {
+    this.commentService.postVote(id).subscribe(data => {
+      window.location.reload();
+      console.log("Voted2 sucessful");
+    });
+
+  }
+
+  unvote2(id: number): void {
+    this.commentService.postUnvote(id).subscribe(data => {
+      window.location.reload();
+      console.log("Unvoted2 sucessful");
+    });
+
+  }
+
+  canVote2(item: Comment) {
+    if (localStorage.getItem("id") != item.user_id && item.voted == false) return true;
+    else return false;
+  }
+
+  canUnvote2(item: Comment) {
+    if (localStorage.getItem("id") != item.user_id && item.voted == true) return true;
+    else return false;
   }
 
 }

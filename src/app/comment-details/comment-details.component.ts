@@ -39,7 +39,7 @@ export class CommentDetailsComponent implements OnInit {
       this.idContribution = this.item.id;
     });
 
-    this.contributionService.getCommentsContributions(this.idContribution).subscribe(data => {
+    this.commentService.getReplies(this.idComment).subscribe(data => {
     console.log("Comments sucessful");
     this.replies = data;
   });
