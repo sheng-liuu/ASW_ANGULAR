@@ -1,13 +1,12 @@
 <table width="85%" style="color:gray"><div class="main-content">
     <ol *ngIf="items!=null">
+      <tr>
+        <table>
       <li *ngFor="let item of items; let i = index">
         <a (click)="vote(item.id)" *ngIf="canVote(item)">
           <img src="assets/vote.png" style="width:10px;height:10px">
         </a>
-        <table>
-          <tr>
-            <td>{{item.title}}</td>
-          </tr>
+            <a>{{item.title}}</a>
           <tr>
             <td>{{item.points}}  points by </td>
             <td><a [routerLink] = "'/user'">{{item.user_name}}</a></td>
@@ -15,10 +14,12 @@
             <td> <a (click)="unvote(item.id)" *ngIf="canUnvote(item)">unvote |</a> </td>
             <td>{{item.text}}</td>
           </tr>
+        </li>
         </table>
           
-        
-      </li>
+     
+      
+    </tr>
     </ol>
   </div></table>
   

@@ -1,28 +1,26 @@
 <table width="85%" style="color:gray"><div class="main-content">
   <ol *ngIf="items!=null">
-    <li *ngFor="let item of items;" class="post">
-      <table>
-        <a (click)="vote(item.id)" *ngIf="canVote(item)">
-          <img src="assets/vote.png" style="width:10px;height:10px">
-        </a>
-        <td *ngIf="item.nametype == 'url';else other_content">
+<tr>
+  <li *ngFor="let item of items;" class="post">
+         <a (click)="vote(item.id)" *ngIf="canVote(item)">
+            <img src="assets/vote.png" style="width:10px;height:10px">
+          </a>
+        <a *ngIf="item.nametype == 'url';else other_content">
           <a style="color: #828282" href="{{item.url}}">({{item.title}})</a>
-        </td>
+        </a>
+
         <ng-template #other_content> {{item.title}} </ng-template>
-            <tr>
-              <td>{{item.points}} points</td>
-              <td>by <a [routerLink] = "['/user', item.user_name]">{{item.user_name}}</a></td>
-              <td><a [routerLink] = "['/contribution-details', item.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> ago | </td>
+              <td>{{item.points}} points by </td>
+              <td><a [routerLink] = "['/user', item.user_name]">{{item.user_name}}</a></td>
+              <td><a [routerLink] = "['/contribution-details', item.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> | </td>
               <td><a [routerLink] = "['/contribution-details', item.id]">  {{numbercomments}} comment |</a>  </td>
-              <td> <a (click)="unvote(item.id)" *ngIf="canUnvote(item)"> unvote |</a> </td>
-            </tr>
+              <td> <a (click)="unvote(item.id)" *ngIf="canUnvote(item)">unvote |</a> </td>
             <tr>
               <div *ngIf="item.nametype == 'ask'">
                 <td>{{item.text}}</td>
               </div>
             </tr>
-        </table>
-        
     </li>
+  </tr>
   </ol>
 </div></table>

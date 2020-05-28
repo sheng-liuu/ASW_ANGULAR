@@ -1,21 +1,24 @@
 <table width="85%" style="color:gray">
   <div class="main-content">
   <ol *ngIf="items!=null">
+
+    <table>
     <li *ngFor="let item of items;" class="post">
-      <table>
         <a (click)="vote(item.id)" *ngIf="canVote(item)">
           <img src="assets/vote.png" style="width:10px;height:10px"> </a>
-        <td *ngIf="item.nametype == 'url';else other_content">
+        <a *ngIf="item.nametype == 'url';else other_content">
           <a [routerLink] = item.url > {{item.title}}</a>
-      </td>
+        </a>
          <ng-template #other_content> {{item.title}} </ng-template>
             <tr>
               <td>by <a [routerLink] = "'/user'">{{item.user_name}}</a></td>
               <td> {{item.points}}  points </td>
               <td><a [routerLink] = "['/contribution-details', item.id]">{{item.created_at}}</a> ago | </td>
               <td> <a (click)="unvote(item.id)" *ngIf="canUnvote(item)">unvote |</a> </td>
-            </tr>
-        </table>      
-    </li>
+            </tr>    
+
+    </li> 
+  </table>
+
   </ol>
 </div></table>
