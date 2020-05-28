@@ -18,24 +18,35 @@
           </div>
         </tr>
       </table>
-      <table>
-        <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-          <div class="col-10">
-            <textarea class="form-control" formControlName="content"></textarea>
-          </div>
-          <button type="submit">Reply</button>
-        </form>
-      </table>
-      <table>
+          <form [formGroup]="createForm"  (ngSubmit)="onSubmit()">
+            <div class="col-10">
+              <textarea class="form-control"  formControlName="content"></textarea>
+            </div>
+            <button type="submit" >Update</button>
+          </form>
+        <table>
         <ol *ngIf="replies!=null">
           <li *ngFor="let comment of replies;" class="post">
-          <td><img src="assets/vote.png" style="width:10px;height:10px"></td>
-         <td> <a [routerLink]="'/user'">{{comment.user_id}} </a></td>
-         <td><a [routerLink]="['/comment-details', comment.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> ago | </td>
-         </li>
-        </ol>
-      </table>
-    </ol>
-  </div>
-</table>
-
+              <tr>
+                <td>
+                  <a (click)="vote2(comment.id)" *ngIf="canVote2(comment)">
+                    <img src="assets/vote.png" style="width:10px;height:10px">
+                  </a>
+                </td>
+                <td> <a [routerLink]="'/user'">{{comment.user_name}} </a></td>
+                <td><a [routerLink]="['/comment-details', comment.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> | <td>
+                <td> <a (click)="unvote2(comment.id)" *ngIf="canUnvote2(comment)">unvote |</a> </td>
+              <!--{{comment.id}}-->
+              </tr>
+              <table>
+                <tr>
+                  <div>
+                    <td> {{comment.content}} </td>
+                </tr>
+                  </div>
+              </table>
+            </li>
+          </ol>
+        </table>
+  </ol>
+</div></table>
