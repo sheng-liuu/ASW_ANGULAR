@@ -72,7 +72,7 @@ export class CommentService {
         'Accept': 'application/json'
       })
     };
-    return this.http.post<any>('https://hackernews12c.herokuapp.com/api/v1/comments/' + id + '/replies', null, httpOptions);
+    return this.http.post<any>('https://hackernews12c.herokuapp.com/api/v1/comments/' + id +'/vote', null, httpOptions);
   }
 getCommentReply(id: number) {
   const httpOptions = {
@@ -82,7 +82,7 @@ getCommentReply(id: number) {
       'Accept': 'application/json'
     })
   };
-  return this.http.post<any>('https://hackernews12c.herokuapp.com/api/v1/comments/' + id + '/vote', null, httpOptions);
+  return this.http.post<any>('https://hackernews12c.herokuapp.com/api/v1/comments/' + id + '/replies', null, httpOptions);
 }
   postUnvote(id: number): Observable<any> {
     const httpOptions = {

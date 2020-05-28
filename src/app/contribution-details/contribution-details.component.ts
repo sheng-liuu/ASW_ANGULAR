@@ -44,6 +44,7 @@ export class ContributionDetailsComponent implements OnInit {
   this.contributionService.getCommentsContributions(this.idContribution).subscribe(data => {
     console.log("Comments sucessful");
     this.comments = data;
+    console.log(this.comments[0].voted)
   });
   }
   
@@ -77,7 +78,7 @@ export class ContributionDetailsComponent implements OnInit {
   }
 
   vote2(id: number): void {
-    this.commentService.postVote(id).subscribe(data => {
+    this.contributionService.postVote2(id).subscribe(data => {
       window.location.reload();
       console.log("Voted2 sucessful");
     });
@@ -85,7 +86,7 @@ export class ContributionDetailsComponent implements OnInit {
   }
 
   unvote2(id: number): void {
-    this.commentService.postUnvote(id).subscribe(data => {
+    this.contributionService.postUnvote2(id).subscribe(data => {
       window.location.reload();
       console.log("Unvoted2 sucessful");
     });
@@ -93,6 +94,7 @@ export class ContributionDetailsComponent implements OnInit {
   }
 
   canVote(item: Contribution) {
+    console.log(item.voted)
     if (localStorage.getItem("id") != item.user_id && item.voted == false) return true;
     else return false;
   }
@@ -103,6 +105,7 @@ export class ContributionDetailsComponent implements OnInit {
   }
 
   canVote2(item: Comment) {
+    console.log(item.points)
     if (localStorage.getItem("id") != item.user_id && item.voted == false) return true;
     else return false;
   }
