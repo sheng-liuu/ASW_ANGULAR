@@ -68,4 +68,6 @@ export class UserService {
 
     return this.http.patch('https://hackernews12c.herokuapp.com/api/v1/user', putIssue, httpOptions);
   }
+  
+  
 }

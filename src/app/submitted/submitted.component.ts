@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContributionService } from '../service/contribution.service';
 import { Contribution } from '../models/contribution';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-submitted',
@@ -10,15 +10,21 @@ import { Router } from '@angular/router';
 })
 export class SubmittedComponent implements OnInit {
   items;
+  public username;
   
   constructor(private contributionService: ContributionService,
-  private router: Router) {}
+  private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.contributionService.getSubmitted(localStorage.getItem("username")).subscribe(data => {
-      console.log("Submitted sucessful");
-      this.items = data;
+    this.route.params.subscribe(params => {
+      console.log(params)
+      this.username = params.id;
+      this.contributionService.getSubmitted(this.username).subscribe(data => {
+        console.log("Submitted sucessful");
+        this.items = data;
+      });
     });
+    
   }
 
 

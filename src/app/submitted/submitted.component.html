@@ -7,7 +7,7 @@
         </tr>
         <tr style="font-size:12px">
           <td>{{item.points}}  points by </td>
-          <td><a [routerLink] = "'/user'">{{item.user_id}}</a></td>
+          <td><a [routerLink] ="['/user', item.user_name]">{{item.user_name}}</a></td>
           <td><a [routerLink] = "'/#'">{{item.created_at}}</a></td>
         </tr>
       </table>

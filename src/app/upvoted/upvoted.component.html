@@ -6,8 +6,8 @@
           <td>{{item.title}}</td>
         </tr>
         <tr>
-          <td>{{item.points}}  points by </td>
-          <td><a [routerLink] = "'/user'">{{item.user_id}}</a></td>
+          <td>{{item.points}}  points </td>
+          <td>by <a [routerLink] ="['/user', item.user_name]">{{item.user_name}}</a></td>
           <td><a [routerLink] = "'/#'">{{item.created_at}}</a></td>
         </tr>
       </table>

@@ -8,4 +8,5 @@ export class Contribution {
   user_id: string;
   voted: boolean;
   created_at: string;
+  user_name: string;
 }

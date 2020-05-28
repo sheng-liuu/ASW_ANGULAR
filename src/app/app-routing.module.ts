@@ -14,10 +14,11 @@ import { ContributionsNewestComponent } from './contributions-newest/contributio
 
 
 const routes: Routes = [
-  {path:  'user', component:  UserComponent},
-  {path:  'submitted', component: SubmittedComponent},
+  { path: '', redirectTo: '/contributions', pathMatch: 'full' },
+  {path:  'user/:id', component:  UserComponent},
+  {path:  'submitted/:id', component: SubmittedComponent},
   {path:  'comment_details', component: CommentDetailsComponent},
-  {path:  'threads', component: ThreadsComponent},
+  {path:  'threads/:id', component: ThreadsComponent},
   {path:  'upvoted', component: UpvotedComponent},
   {path:  'upvotedcomment', component: UpvotedcommentComponent},
   {path:  'contribution-details/:id', component: ContributionDetailsComponent},

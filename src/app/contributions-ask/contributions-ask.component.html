@@ -10,7 +10,7 @@
           </tr>
           <tr>
             <td>{{item.points}}  points by </td>
-            <td><a [routerLink] = "'/user'">{{item.user_id}}</a></td>
+            <td><a [routerLink] = "'/user'">{{item.user_name}}</a></td>
             <td><a [routerLink] = "'/#'">{{item.created_at}}</a></td>
             <td> <a (click)="unvote(item.id)" *ngIf="canUnvote(item)">unvote |</a> </td>
             <td>{{item.text}}</td>

@@ -1,5 +1,5 @@
   <table width="85%" style="color:gray"><table border="0" cellpadding="0" cellspacing="0" class="itemlist" style="color:#333" align="left">
-                  <tr>
+                  <tr *ngIf="isCurrentUser()">
                     <td>API-KEY:</td>
                     <td><font color="#3c963c">{{localUser.api_key}}</font></td>
                   </tr>
@@ -8,14 +8,18 @@
                     <td><font color="#3c963c">{{localUser.name}}</font></td>
                   </tr>
                   <tr>
-                    <td>created:</td>
+                    <td>created:&nbsp;&nbsp;&nbsp;</td> 
                     <td>{{localUser.created_at}}</td>
                   </tr>
-                  <tr>
-                    <td>email:</td>
+                  <tr *ngIf="isCurrentUser()">
+                    <td >email:</td>
                     <td>{{localUser.email}}</td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="!isCurrentUser()">
+                    <td >about:</td>
+                    <td>{{localUser.about}}</td>
+                  </tr>
+                  <tr *ngIf="isCurrentUser()">
                     <td>about:</td>
                     <td>
                       <form (ngSubmit)="onSubmit()">
@@ -29,13 +33,13 @@
                   </tr>
                   <tr>
                     <td></td>
-                    <td><a [routerLink] = "'/submitted'">submissions</a></td>
+                    <td><a [routerLink] = "['/submitted', localUser.name]">submissions</a></td>
                   </tr>
                   <tr>
                     <td></td>
-                    <td><a [routerLink] = "'/threads'">comments</a></td>
+                    <td><a [routerLink] = "['/threads', localUser.name]">comments</a></td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="isCurrentUser()">
                     <td></td>
                     <td><a [routerLink] = "'/upvoted'">upvoted submissions</a> / <a [routerLink] = "'/upvotedcomment'"> comments</a> (private)</td>
                   </tr>
