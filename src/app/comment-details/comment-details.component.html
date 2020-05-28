@@ -12,14 +12,13 @@
           <td>{{item.content}}</td>
         </tr>
       </table>
-      <table>
+
         <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
           <div class="col-10">
             <textarea class="form-control" formControlName="content"></textarea>
           </div>
-          <button type="submit">Update</button>
+          <button type="submit">Comment</button>
         </form>
-      </table>
       <table>
         <ol *ngIf="replies!=null">
           <li *ngFor="let comment of replies;" class="post">
