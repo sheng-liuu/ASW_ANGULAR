@@ -22,9 +22,15 @@ export class ContributionDetailsComponent implements OnInit {
     this.idContribution = params.number;
   });
   this.contributionService.getContribution(this.idContribution).subscribe(data => {
-    console.log("UpvotedComment sucessful");
+    console.log("Show contribution sucessful");
     this.item = data;
   });
+  
+    this.contributionService.getComments(this.idContribution).subscribe(data => {
+    console.log("Show comments sucessful");
+    this.item = data;
+  });
+  
   }
   onSubmit() {
 
