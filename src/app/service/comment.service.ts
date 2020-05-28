@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SocialUser } from 'angularx-social-login';
-
+import { CommentDTO } from '../models/commentDTO';
 
 
 @Injectable({
@@ -52,5 +52,15 @@ export class CommentService {
     return this.http.get<Comment>(
     'https://hackernews12c.herokuapp.com/api/v1/comments/' + id_comment, httpOptions);
   }
-  
+  postComment(comment: CommentDTO,): Observable<Comment>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'X-API-KEY': localStorage.getItem("apikey"),
+        'Accept': 'application/json'
+      })
+    };
+    return this.http.post<Comment>(
+      'https://hackernews12c.herokuapp.com/api/v1/comments', comment, httpOptions);
+  }
 }
