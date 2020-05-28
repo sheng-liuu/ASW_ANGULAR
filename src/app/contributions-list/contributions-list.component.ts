@@ -11,11 +11,14 @@ import { Contribution } from '../models/contribution';
 })
 export class ContributionsListComponent implements OnInit {
   items: Contribution[];
+  public isLogin: boolean;
   
   constructor(private contributionService: ContributionService,
   private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem("apikey")) this.isLogin = true;
+    else this.isLogin = false;
         this.contributionService.getUrl().subscribe(data => {
         console.log("Contributions ask sucessful");
         this.items = data;
@@ -24,7 +27,7 @@ export class ContributionsListComponent implements OnInit {
   
   vote(id: number) :void{
     this.contributionService.postVote(id).subscribe(data => {
-      this.router.navigateByUrl('/contributions');
+      window.location.reload();
       console.log("Voted sucessful");
     });
     
@@ -32,7 +35,7 @@ export class ContributionsListComponent implements OnInit {
   
   unvote(id: number) :void{
     this.contributionService.postUnvote(id).subscribe(data => {
-      this.router.navigateByUrl('/contributions');
+      window.location.reload();
       console.log("Unvoted sucessful");
     });
     
