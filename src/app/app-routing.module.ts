@@ -14,6 +14,7 @@ import { ContributionsNewestComponent } from './contributions-newest/contributio
 
 
 const routes: Routes = [
+  { path: '', redirectTo: '/contributions', pathMatch: 'full' },
   {path:  'user/:id', component:  UserComponent},
   {path:  'submitted/:id', component: SubmittedComponent},
   {path:  'comment_details', component: CommentDetailsComponent},

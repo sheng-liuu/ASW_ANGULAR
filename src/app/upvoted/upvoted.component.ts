@@ -18,5 +18,13 @@ export class UpvotedComponent implements OnInit {
       this.items = data;
     });
   }
+  
+  unvote(id: number) :void{
+    this.contributionService.postUnvote(id).subscribe(data => {
+      window.location.reload();
+      console.log("Unvoted sucessful");
+    });
+    
+  }
 
 }
