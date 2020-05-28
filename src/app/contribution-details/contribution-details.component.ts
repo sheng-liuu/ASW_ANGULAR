@@ -59,5 +59,59 @@ export class ContributionDetailsComponent implements OnInit {
       this.router.navigateByUrl('/contribution-details/'+ this.idContribution);
     });
   }
+
+  vote(id: number): void {
+    this.contributionService.postVote(id).subscribe(data => {
+      window.location.reload();
+      console.log("Voted sucessful");
+    });
+
+  }
+
+  unvote(id: number): void {
+    this.contributionService.postUnvote(id).subscribe(data => {
+      window.location.reload();
+      console.log("Unvoted sucessful");
+    });
+
+  }
+
+  vote2(id: number): void {
+    this.commentService.postVote(id).subscribe(data => {
+      window.location.reload();
+      console.log("Voted2 sucessful");
+    });
+
+  }
+
+  unvote2(id: number): void {
+    this.commentService.postUnvote(id).subscribe(data => {
+      window.location.reload();
+      console.log("Unvoted2 sucessful");
+    });
+
+  }
+
+  canVote(item: Contribution) {
+    if (localStorage.getItem("id") != item.user_id && item.voted == false) return true;
+    else return false;
+  }
+
+  canUnvote(item: Contribution) {
+    if (localStorage.getItem("id") != item.user_id && item.voted == true) return true;
+    else return false;
+  }
+
+  canVote2(item: Comment) {
+    if (localStorage.getItem("id") != item.user_id && item.voted == false) return true;
+    else return false;
+  }
+
+  canUnvote2(item: Comment) {
+    if (localStorage.getItem("id") != item.user_id && item.voted == true) return true;
+    else return false;
+  }
+
+
 }
 
