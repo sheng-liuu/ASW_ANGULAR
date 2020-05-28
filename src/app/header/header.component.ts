@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
  
   signInWithGoogle(): void {
       while (!this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)) {}
-
+      //this.router.navigateByUrl('/contributions');
       this.authService.authState.subscribe((user) => {
         localStorage.setItem("username", user.name);
         this.loggedIn = (user != null);
@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit {
             localStorage.setItem("id", n.id);
             localStorage.setItem("apikey", n.api_key);
             this.localUser = n;
-            //window.location.reload();
           }
         });
 
@@ -42,10 +41,11 @@ export class HeaderComponent implements OnInit {
  
   signOut(): void {
     this.authService.signOut();
+    localStorage.removeItem("id");
     localStorage.removeItem("username");
     localStorage.removeItem("apikey");
     this.localUser = null;
-    //this.router.navigateByUrl('/contributions');
+    this.router.navigateByUrl('/');
   }
 
   ngOnInit(): void {

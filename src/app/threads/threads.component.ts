@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommentService } from '../service/comment.service';
 
 @Component({
@@ -9,15 +9,20 @@ import { CommentService } from '../service/comment.service';
 })
 export class ThreadsComponent implements OnInit {
   items;
+  public username;
   
   constructor(private commentService: CommentService,
-  private router: Router) {}
+  private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.commentService.getThreads(localStorage.getItem("username")).subscribe(data => {
-      console.log("Thread sucessful");
-      this.items = data;
+    this.route.params.subscribe(params => {
+      this.username = params.id;
+      this.commentService.getThreads(localStorage.getItem("username")).subscribe(data => {
+        console.log("Thread sucessful");
+        this.items = data;
+      });
     });
+    
   }
 
 }

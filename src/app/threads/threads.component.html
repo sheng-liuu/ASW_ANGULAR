@@ -3,7 +3,7 @@
     <li *ngFor="let item of items;" class="post">
       <table>
         <tr>
-          <td>by <a [routerLink] = "'/user'">{{item.user_id}}</a></td>
+          <td>by <a [routerLink] ="['/user', item.user_name]">{{item.user_name}}</a></td>
           <td><a [routerLink] = "'/#'">{{item.created_at}}</a> | </td>
           <td><a [routerLink] = "'/#'">parent</a> | </td>
           <td>on: <a [routerLink] = "'/#'">{{item.contribution_id}}</a></td>

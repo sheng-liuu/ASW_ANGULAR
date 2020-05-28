@@ -10,8 +10,8 @@
       </td>
          <ng-template #other_content> {{item.title}} </ng-template>
             <tr>
+              <td>by <a [routerLink] = "'/user'">{{item.user_name}}</a></td>
               <td> {{item.points}}  points </td>
-              <td>by <a [routerLink] = "['/user', item.user_name]">{{item.user_name}}</a></td>
               <td><a [routerLink] = "['/contribution-details', item.id]">{{item.created_at}}</a> ago | </td>
               <td> <a (click)="unvote(item.id)" *ngIf="canUnvote(item)">unvote |</a> </td>
             </tr>

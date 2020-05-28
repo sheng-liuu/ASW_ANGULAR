@@ -7,4 +7,5 @@ export class Comment {
     voted: boolean;
     points: number;
     created_at: string;
+    user_name: string;
 }
