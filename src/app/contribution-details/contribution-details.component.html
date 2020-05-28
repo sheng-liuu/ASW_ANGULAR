@@ -25,5 +25,14 @@
             <button type="submit" >Update</button>
           </form>
         </table>
+        <table>
+          <ol *ngIf="comments!=null">
+            <li *ngFor="let comment of comments;" class="post">
+              <td><img src="assets/vote.png" style="width:10px;height:10px"></td>
+              <td> <a [routerLink] = "'/user'">{{comment.user_id}} </a></td>
+              <td><a [routerLink] = "'/#'">{{comment.created_at}}</a> ago | </td>
+                </li>
+          </ol>
+        </table>
   </ol>
 </div></table>

@@ -4,6 +4,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SocialUser } from 'angularx-social-login';
 import { Contribution } from '../models/contribution';
+import { Comment } from '../models/comment';
 import { ContributionDTO } from '../models/contributionDTO';
 import { identifierModuleUrl } from '@angular/compiler';
 
@@ -67,7 +68,16 @@ export class ContributionService {
     return this.http.get<Contribution>(
     'https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id, httpOptions);
   }
-  
+  getCommentsContributions(id: number): Observable<Comment[]> { //all
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'X-API-KEY': localStorage.getItem("apikey"),
+        'Accept': 'application/json'
+      })
+    };
+    return this.http.get<Comment[]>('https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id +'/comments', httpOptions);
+  }
   getContributions(): Observable<Contribution[]> { //all
     const httpOptions = {
       headers: new HttpHeaders({

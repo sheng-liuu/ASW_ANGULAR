@@ -20,6 +20,7 @@ export class ContributionDetailsComponent implements OnInit {
   idContribution: number;
  idUser: String;
  idComment: number;
+ comments: Comment[];
 
   constructor(private contributionService: ContributionService,
     private commentService: CommentService,
@@ -40,9 +41,12 @@ export class ContributionDetailsComponent implements OnInit {
   });
 
   this.idUser = localStorage.getItem("id");
-  
+  this.contributionService.getCommentsContributions(this.idContribution).subscribe(data => {
+    console.log("Comments sucessful");
+    this.comments = data;
+  });
   }
-
+  
   onSubmit() {
     const postItem: CommentDTO = {
       content: this.createForm.controls['content'].value,
