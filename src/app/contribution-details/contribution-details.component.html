@@ -9,8 +9,8 @@
       <table>
         <tr>
           <td>{{item.points}} points by</td>
-          <td><a [routerLink]="'/user'">{{item.user_name}}</a></td>
-          <td><a [routerLink]="'/#'">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> | </td>
+          <td><a [routerLink] = "['/user', item.user_name]">{{item.user_name}}</a></td>
+          <td><a [routerLink] = "'/#'">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> | </td>
         </tr>
         <tr>
           <div *ngIf="item.nametype == 'ask'">
@@ -40,11 +40,30 @@
             </tr>
             <table>
               <tr>
-                <div>
-                  <td> {{comment.content}} </td>
-                </div>
-            </table>
-            <app-comment-basic [comment]="comment"></app-comment-basic>
+                <td>
+                  <a (click)="vote2(comment.id)" *ngIf="canVote2(comment)">
+                    <img src="assets/vote.png" style="width:10px;height:10px">
+                  </a>
+                </td>
+                <td><a [routerLink] = "['/user', comment.user_name]">{{comment.user_name}}</a></td>
+                <td><a [routerLink]="['/comment-details', comment.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a></td>
+                <td> <a (click)="unvote2(comment.id)" *ngIf="canUnvote2(comment)">| unvote</a> </td>
+              <!--{{comment.id}}-->
+              </tr>
+              <table>
+                <tr>
+                  <div>
+                    <td> {{comment.content}} </td>
+                  </div>
+                </tr>
+              </table>
+              <table>
+                <tr>
+                  <div>
+                    <td><a [routerLink]="['/comment-details', comment.id]">reply</a></td>
+                  </div>
+                </tr>
+              </table>
             </li>
 </ol>
         </table>
