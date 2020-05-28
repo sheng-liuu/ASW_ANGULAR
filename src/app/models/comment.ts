@@ -1,7 +1,7 @@
 export class Comment {
     id: number;
     content: string;
-    user_id: number;
+    user_id: string;
     contribution_id: number;
     comment_id: number;
     voted: boolean;
