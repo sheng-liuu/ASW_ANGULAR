@@ -1,6 +1,9 @@
 <table width="85%" style="color:gray"><div class="main-content">
     <ol *ngIf="items!=null">
-      <li *ngFor="let item of items; let i = index" class="post">
+      <li *ngFor="let item of items; let i = index">
+        <a (click)="vote(item.id)" *ngIf="canVote(item)">
+          <img src="assets/vote.png" style="width:10px;height:10px">
+        </a>
         <table>
           <tr>
             <td>{{item.title}}</td>
@@ -9,6 +12,8 @@
             <td>{{item.points}}  points by </td>
             <td><a [routerLink] = "'/user'">{{item.user_id}}</a></td>
             <td><a [routerLink] = "'/#'">{{item.created_at}}</a></td>
+            <td> <a (click)="unvote(item.id)" *ngIf="canUnvote(item)">unvote |</a> </td>
+            <td>{{item.text}}</td>
           </tr>
         </table>
           

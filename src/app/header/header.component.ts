@@ -3,6 +3,7 @@ import { AuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login"
 import { UserService } from '../service/user.service';
 import { User } from '../models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,11 +12,11 @@ import { User } from '../models/user';
 })
 export class HeaderComponent implements OnInit {
   public localUser: User;
-  private user: SocialUser
+  public user: SocialUser
   private loggedIn: boolean;
   
   constructor(private userService: UserService,
-              private authService: AuthService) { }
+              private authService: AuthService,private router: Router) { }
  
   signInWithGoogle(): void {
       while (!this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)) {}
@@ -25,8 +26,10 @@ export class HeaderComponent implements OnInit {
         this.loggedIn = (user != null);
         this.userService.login(user).subscribe(n => {
           if(n != null) {
+            localStorage.setItem("id", n.id);
             localStorage.setItem("apikey", n.api_key);
             this.localUser = n;
+            //window.location.reload();
           }
         });
 
@@ -42,12 +45,12 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem("username");
     localStorage.removeItem("apikey");
     this.localUser = null;
+    //this.router.navigateByUrl('/contributions');
   }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
       this.user = user;
-      localStorage.setItem("username", user.name);
     }, (error) => console.log(error));
   }
 

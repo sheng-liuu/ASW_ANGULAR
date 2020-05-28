@@ -1,4 +1,5 @@
 export class User {
+  id: string;
   api_key: string;
   name: string;
   about: string;

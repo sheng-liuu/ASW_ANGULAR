@@ -11,26 +11,43 @@ import { Contribution } from '../models/contribution';
 })
 export class ContributionsListComponent implements OnInit {
   items: Contribution[];
-  stringToSubmit: String;
+  public isLogin: boolean;
   
   constructor(private contributionService: ContributionService,
   private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-
-    this.route.params.subscribe(params => {
-      this.stringToSubmit = params.String;
-  });
-        this.contributionService.getContributions(this.stringToSubmit).subscribe(data => {
+    if(localStorage.getItem("apikey")) this.isLogin = true;
+    else this.isLogin = false;
+        this.contributionService.getUrl().subscribe(data => {
         console.log("Contributions ask sucessful");
         this.items = data;
         });
   }
   
-  vote() :void{
-    this.contributionService.postVote(number id)
-  }
+  vote(id: number) :void{
+    this.contributionService.postVote(id).subscribe(data => {
+      window.location.reload();
+      console.log("Voted sucessful");
+    });
     
-} 
-
-
+  }
+  
+  unvote(id: number) :void{
+    this.contributionService.postUnvote(id).subscribe(data => {
+      window.location.reload();
+      console.log("Unvoted sucessful");
+    });
+    
+  }
+  
+  canVote(item: Contribution){
+    if(localStorage.getItem("id") != item.user_id && item.voted == false) return true;
+    else return false;
+  }
+  
+  canUnvote(item: Contribution){
+    if(localStorage.getItem("id") != item.user_id && item.voted == true) return true;
+    else return false;
+  }
+}
