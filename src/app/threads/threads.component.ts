@@ -12,7 +12,6 @@ import { ContributionService } from '../service/contribution.service';
 export class ThreadsComponent implements OnInit {
   items;
   public username;
-  public title;
   
   constructor(private commentService: CommentService,
   private router: Router, private route: ActivatedRoute, private contributionService: ContributionService,) {}
@@ -30,10 +29,8 @@ export class ThreadsComponent implements OnInit {
   
   async getContributionTitle(id: number){
     this.contributionService.getContribution(id).subscribe(data => {
-      this.title = data.title;
+      localStorage.setItem("title", data.title);
     });
-    console.log(this.title);
-    return this.title;
   }
 
 }
