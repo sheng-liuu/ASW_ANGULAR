@@ -8,7 +8,8 @@
         <tr>
           <td>{{item.points}}  points </td>
           <td>by <a [routerLink] ="['/user', item.user_name]">{{item.user_name}}</a></td>
-          <td><a [routerLink] = "'/#'">{{item.created_at}}</a></td>
+          <td><a [routerLink] = "['/contribution-details', item.id]">| created at {{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a></td>
+          <td><a (click)="unvote(item.id)" *ngIf="item.voted">| unvote </a> </td>
         </tr>
       </table>
         
