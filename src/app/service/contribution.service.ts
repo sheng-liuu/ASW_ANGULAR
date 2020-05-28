@@ -68,17 +68,6 @@ export class ContributionService {
     'https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id, httpOptions);
   }
   
-  getComments(id): Observable<Contribution[]> { //all
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'X-API-KEY': localStorage.getItem("apikey"),
-        'Accept': 'application/json'
-      })
-    };
-    return this.http.get<Comment[]>('https://hackernews12c.herokuapp.com/api/v1/contributions'+ id + '/comments', httpOptions);
-  }
-  
   getContributions(): Observable<Contribution[]> { //all
     const httpOptions = {
       headers: new HttpHeaders({

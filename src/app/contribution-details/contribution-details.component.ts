@@ -38,11 +38,6 @@ export class ContributionDetailsComponent implements OnInit {
     console.log("Show contribution sucessful");
     this.item = data;
   });
-  
-  this.contributionService.getComments(this.idContribution).subscribe(data => {
-    console.log("Show comments sucessful");
-    this.item = data;
-  });
 
   this.idUser = localStorage.getItem("id");
   
