@@ -36,7 +36,7 @@ export class ContributionDetailsComponent implements OnInit {
 
   });
   this.contributionService.getContribution(this.idContribution).subscribe(data => {
-    console.log("UpvotedComment sucessful");
+    console.log("Show contribution sucessful");
     this.item = data;
   });
 
