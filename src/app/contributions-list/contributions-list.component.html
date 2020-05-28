@@ -1,14 +1,17 @@
 <table width="85%" style="color:gray"><div class="main-content">
   <ol *ngIf="items!=null">
     <li *ngFor="let item of items;" class="post">
-        <a (click)="vote(item.id)" *ngIf="canVote(item)">
-          <img src="assets/vote.png" style="width:10px;height:10px">
-        </a>
-        <div *ngIf="item.nametype == 'url';else other_content">
+      <tr>
+        <td>
+          <a (click)="vote(item.id)" *ngIf="canVote(item)">
+            <img src="assets/vote.png" style="width:10px;height:10px">
+          </a>
+        </td>
+        <td *ngIf="item.nametype == 'url';else other_content">
           <a style="color: #828282" href="{{item.url}}">({{item.title}})</a>
-        </div>
+        </td>
+      </tr>
         <ng-template #other_content> {{item.title}} </ng-template>
-         
         <table>
             <tr>
               <td>{{item.points}} points by </td>
