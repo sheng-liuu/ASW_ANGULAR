@@ -36,11 +36,12 @@ export class CommentDetailsComponent implements OnInit {
     this.commentService.getCommentDetails(this.idComment).subscribe(data => {
       console.log("Comment sucessful");
       this.item = data;
-      this.idContribution = this.item.id;
+      this.idContribution = this.item.contribution_id;
+      console.log(this.idContribution)
     });
 
     this.contributionService.getCommentsContributions(this.idContribution).subscribe(data => {
-    console.log("Comments sucessful");
+    console.log("Reply sucessful");
     this.replies = data;
   });
   }
@@ -53,7 +54,7 @@ export class CommentDetailsComponent implements OnInit {
       comment_id: this.idComment
     };
     this.commentService.postComment(postItem).subscribe(data => {
-      console.log("Comment sucessful");
+      console.log("Reply sucessful");
       this.router.navigateByUrl('/contribution-details/' + this.idContribution);
     });
   }
