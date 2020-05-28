@@ -14,7 +14,7 @@ import { ContributionsNewestComponent } from './contributions-newest/contributio
 
 
 const routes: Routes = [
-  {path:  'user', component:  UserComponent},
+  {path:  'user/:name', component:  UserComponent},
   {path:  'submitted', component: SubmittedComponent},
   {path:  'threads', component: ThreadsComponent},
   {path:  'upvoted', component: UpvotedComponent},
