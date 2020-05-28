@@ -32,18 +32,19 @@
         <table>
           <ol *ngIf="comments!=null">
             <li *ngFor="let comment of comments;" class="post">
-          <td>
-            <a (click)="vote2(comment.id)" *ngIf="canVote2(comment)">
-              <img src="assets/vote.png" style="width:10px;height:10px">
-            </a>
-          </td>
-          <td> <a [routerLink]="'/user'">{{comment.user_id}} </a></td>
-          <td><a [routerLink]="'/#'">{{comment.created_at}}</a> ago | </td>
-          <td> <a (click)="unvote2(comment.id)" *ngIf="canUnvote2(comment)">unvote |</a> </td>
-          {{comment.id}}
-          <td> {{comment.content}} </td>
-          </li>
-</ol>
+              <td>
+                <a (click)="vote2(comment.id)" *ngIf="canVote2(comment)">
+                  <img src="assets/vote.png" style="width:10px;height:10px">
+                </a>
+              </td>
+              <td> <a [routerLink]="'/user'">{{comment.user_id}} </a></td>
+              <!----<td><a [routerLink]="['/comment-details', comment.id]">{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> ago | </td> -->
+              <td><a [routerLink]="['/comment-details', comment.id]">DATA</a> ago |    <td>
+              <td> <a (click)="unvote2(comment.id)" *ngIf="canUnvote2(comment)">unvote |</a> </td>
+              {{comment.id}}
+              <td> {{comment.content}} </td>
+            </li>
+          </ol>
         </table>
   </ol>
 </div></table>

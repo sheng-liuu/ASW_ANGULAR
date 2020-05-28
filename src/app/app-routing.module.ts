@@ -16,11 +16,11 @@ import { ContributionsNewestComponent } from './contributions-newest/contributio
 const routes: Routes = [
   {path:  'user', component:  UserComponent},
   {path:  'submitted', component: SubmittedComponent},
-  {path:  'comment_details', component: CommentDetailsComponent},
   {path:  'threads', component: ThreadsComponent},
   {path:  'upvoted', component: UpvotedComponent},
   {path:  'upvotedcomment', component: UpvotedcommentComponent},
-  {path:  'contribution-details/:id', component: ContributionDetailsComponent},
+  { path: 'contribution-details/:id', component: ContributionDetailsComponent },
+  { path: 'comment-details/:id', component: CommentDetailsComponent },
   {path:  'contributions', component: ContributionsListComponent},
   {path:  'ask', component: ContributionsAskComponent},
   {path:  'newest', component: ContributionsNewestComponent},
