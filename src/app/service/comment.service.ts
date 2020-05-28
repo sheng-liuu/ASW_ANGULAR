@@ -72,9 +72,18 @@ export class CommentService {
         'Accept': 'application/json'
       })
     };
-    return this.http.post<any>('https://hackernews12c.herokuapp.com/api/v1/comments/' + id + '/vote', null, httpOptions);
+    return this.http.post<any>('https://hackernews12c.herokuapp.com/api/v1/comments/' + id + '/replies', null, httpOptions);
   }
-
+getCommentReply(id: number) {
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-API-KEY': localStorage.getItem("apikey"),
+      'Accept': 'application/json'
+    })
+  };
+  return this.http.post<any>('https://hackernews12c.herokuapp.com/api/v1/comments/' + id + '/vote', null, httpOptions);
+}
   postUnvote(id: number): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
