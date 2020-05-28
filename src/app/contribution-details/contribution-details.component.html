@@ -9,8 +9,8 @@
       <table>
         <tr>
           <td>{{item.points}} points by</td>
-          <td><a [routerLink]="'/user'">{{item.user_name}}</a></td>
-          <td><a [routerLink]="'/#'">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> | </td>
+          <td><a [routerLink] = "['/user', item.user_name]">{{item.user_name}}</a></td>
+          <td><a [routerLink] = "'/#'">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> | </td>
         </tr>
         <tr>
           <div *ngIf="item.nametype == 'ask'">
@@ -22,7 +22,7 @@
             <div class="col-10">
               <textarea class="form-control"  formControlName="content"></textarea>
             </div>
-            <button type="submit" >Update</button>
+            <button type="submit" >Add Comment</button>
           </form>
         <table>
         <ol *ngIf="comments!=null">
@@ -41,8 +41,15 @@
                  <td> <app-comment-basic [comment]="comment"></app-comment-basic> </td>
 
               </table>
+              <table>
+                <tr>
+                  <div>
+                    <td><a [routerLink]="['/comment-details', comment.id]">reply</a></td>
+                  </div>
+                </tr>
+              </table>
             </li>
-          </ol>
+</ol>
         </table>
   </ol>
 </div></table>

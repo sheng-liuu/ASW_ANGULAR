@@ -1,7 +1,10 @@
-<table width="85%" style="color:gray">
-  <div class="main-content">
-    <ol *ngIf="item!=null">
-
+<table width="85%" style="color:gray"><div class="main-content">
+  <ol *ngIf="item!=null">
+    <table>
+      <tr>
+        <td><a [routerLink] = "['/user', item.user_name]">{{item.user_name}}</a></td>
+        <td><a [routerLink] = "'/#'">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a></td>
+      </tr>
       <table>
         <tr>
           <td>{{item.points}} points by</td>
@@ -22,9 +25,10 @@
       <table>
         <ol *ngIf="replies!=null">
           <li *ngFor="let comment of replies;" class="post">
-          <td><img src="assets/vote.png" style="width:10px;height:10px"></td>
-          <td> <a [routerLink]="'/user'">{{comment.user_id}} </a></td>
-          <td><a [routerLink]="['/comment-details', comment.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> ago | </td>
+            <td><img src="assets/vote.png" style="width:10px;height:10px"></td>
+            <td> <a [routerLink]="'/user'">{{comment.user_id}} </a></td>
+            <td><a [routerLink]="['/comment-details', comment.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> ago | </td>
+            <app-comment-basic [comment]="comment"></app-comment-basic>
          </li>
         </ol>
       </table>
