@@ -63,11 +63,12 @@ export class HeaderComponent implements OnInit {
       console.log(this.loggedIn);
       localStorage.setItem("username", user.name);
       if (this.loggedIn) {
-        this.userService.getUserByUsername(user.name).subscribe(n => {
+        this.userService.login(user).subscribe(n => {
           this.localUser = n;
           console.log("Login heroku   " + this.localUser);
           localStorage.setItem("apikey", n.api_key);
           localStorage.setItem("id", n.id);
+          this.router.navigateByUrl('/contributions');
         });
       }
     }, (error) => console.log(error));
