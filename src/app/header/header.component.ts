@@ -13,29 +13,33 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   public localUser: User;
   public user: SocialUser
-  private loggedIn: boolean;
+  public loggedIn: boolean;
   
   constructor(private userService: UserService,
               private authService: AuthService,private router: Router) { }
  
   signInWithGoogle(): void {
-      while (!this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)) {}
-      //this.router.navigateByUrl('/contributions');
-      this.authService.authState.subscribe((user) => {
-        localStorage.setItem("username", user.name);
-        this.loggedIn = (user != null);
-        this.userService.login(user).subscribe(n => {
-          if(n != null) {
-            localStorage.setItem("id", n.id);
-            localStorage.setItem("apikey", n.api_key);
-            this.localUser = n;
-          }
-        });
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
 
       console.log("user: ");
       console.log(user);
       console.log("logged in: ");
-    
+      console.log(this.loggedIn);
+      if (user != null) localStorage.setItem("username", user.name);
+      if (this.loggedIn) {
+        this.userService.login(user).subscribe(n => {
+          this.localUser = n;
+          localStorage.setItem("apikey", n.api_key);
+          localStorage.setItem("id", n.id);
+          console.log(n);
+          console.log(this.localUser);
+          this.router.navigateByUrl('/contributions');
+          });
+      }
     });
   }
  
@@ -51,6 +55,22 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
       this.user = user;
+      this.loggedIn = (user != null);
+
+      console.log("**user: ");
+      console.log(user);
+      console.log("logged in: ");
+      console.log(this.loggedIn);
+      localStorage.setItem("username", user.name);
+      if (this.loggedIn) {
+        this.userService.login(user).subscribe(n => {
+          this.localUser = n;
+          console.log("Login heroku   " + this.localUser);
+          localStorage.setItem("apikey", n.api_key);
+          localStorage.setItem("id", n.id);
+          this.router.navigateByUrl('/contributions');
+        });
+      }
     }, (error) => console.log(error));
   }
 

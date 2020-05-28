@@ -1,5 +1,4 @@
-<table width="85%" style="color:gray">
-  <div class="main-content">
+<table width="85%" style="color:gray"><div class="main-content">
   <ol *ngIf="items!=null">
 
     <table>
@@ -11,9 +10,9 @@
         </a>
          <ng-template #other_content> {{item.title}} </ng-template>
             <tr>
-              <td>by <a [routerLink] = "'/user'">{{item.user_name}}</a></td>
-              <td> {{item.points}}  points </td>
-              <td><a [routerLink] = "['/contribution-details', item.id]">{{item.created_at}}</a> ago | </td>
+              <td>{{item.points}} points by </td>
+              <td><a [routerLink] = "'/user'">{{item.user_name}}</a></td>
+              <td><a [routerLink] = "['/contribution-details', item.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> | </td>
               <td> <a (click)="unvote(item.id)" *ngIf="canUnvote(item)">unvote |</a> </td>
             </tr>    
 
