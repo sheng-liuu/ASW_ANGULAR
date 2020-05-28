@@ -13,6 +13,7 @@
                         <span class="pagetop">
                             <b class="hnname"><a [routerLink]="'/contributions'" >Hacker News</a></b> |
                             <a [routerLink]="'/newest'" >newest</a> | 
+                            <a *ngIf = "localUser!=null" [routerLink] = "['/threads', localUser.name]">threads | </a>
                             <a [routerLink]="'/ask'" >ask</a> | 
                             <a [routerLink] = "'/submit'">submit</a>            
                         </span>
