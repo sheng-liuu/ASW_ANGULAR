@@ -22,7 +22,7 @@ export class ContributionsNewestComponent implements OnInit {
   
   vote(id: number) :void{
     this.contributionService.postVote(id).subscribe(data => {
-      this.router.navigateByUrl('/contributions');
+      window.location.reload();
       console.log("Voted sucessful");
     });
     
@@ -30,7 +30,7 @@ export class ContributionsNewestComponent implements OnInit {
   
   unvote(id: number) :void{
     this.contributionService.postUnvote(id).subscribe(data => {
-      this.router.navigateByUrl('/contributions');
+      window.location.reload();
       console.log("Unvoted sucessful");
     });
     

@@ -12,6 +12,7 @@ import { ContributionDTO } from '../models/contributionDTO';
 })
 export class ContributionsSubmitComponent implements OnInit {
   public item: Contribution;
+  public haveError: boolean;
   
  constructor(private contributionService: ContributionService,
   private router: Router) { }
@@ -23,6 +24,7 @@ export class ContributionsSubmitComponent implements OnInit {
   });
   
   ngOnInit(): void {
+    this.haveError = false;
   }
   onSubmit() {
     const postItem: ContributionDTO = {
@@ -30,9 +32,14 @@ export class ContributionsSubmitComponent implements OnInit {
       url: this.createForm.controls['url'].value,
       text: this.createForm.controls['text'].value,
     };
-    this.contributionService.postContribution(postItem).subscribe(data => {
-      console.log("Submitted sucessful");
-      this.router.navigateByUrl('/contributions');
-    });
+    
+    (this.contributionService.postContribution(postItem)).subscribe(
+      async (response) => {
+        this.haveError = false;
+        console.log("Submitted sucessful");
+        this.router.navigateByUrl('/newest');
+      },
+      (error) => this.haveError = true);
+    
   }
 }
