@@ -24,20 +24,23 @@ export class HeaderComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
-
+      
       console.log("user: ");
       console.log(user);
       console.log("logged in: ");
       console.log(this.loggedIn);
       if (user != null) localStorage.setItem("username", user.name);
+      
       if (this.loggedIn) {
+        window.location.reload();
         this.userService.login(user).subscribe(n => {
           this.localUser = n;
           localStorage.setItem("apikey", n.api_key);
           localStorage.setItem("id", n.id);
+          this.router.navigateByUrl('/contributions');
           console.log(n);
           console.log(this.localUser);
-          this.router.navigateByUrl('/contributions');
+          
           });
       }
     });
@@ -48,6 +51,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem("id");
     localStorage.removeItem("username");
     localStorage.removeItem("apikey");
+    localStorage.setItem("first", "yes");
     this.localUser = null;
     this.router.navigateByUrl('/');
   }
@@ -68,7 +72,12 @@ export class HeaderComponent implements OnInit {
           console.log("Login heroku   " + this.localUser);
           localStorage.setItem("apikey", n.api_key);
           localStorage.setItem("id", n.id);
-          this.router.navigateByUrl('/contributions');
+          if(localStorage.getItem("first") != null) {
+            this.router.navigateByUrl('/contributions');
+            localStorage.removeItem("first");
+          }
+          //
+          //window.location.reload();
         });
       }
     }, (error) => console.log(error));

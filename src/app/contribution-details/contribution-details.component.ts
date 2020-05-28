@@ -16,11 +16,11 @@ import { UserService } from '../service/user.service';
 })
 export class ContributionDetailsComponent implements OnInit {
   public item: Contribution;
-  comment: Comment;
-  idContribution: number;
- idUser: String;
- idComment: number;
- comments: Comment[];
+  public  comment: Comment;
+  public idContribution: number;
+  public idUser: String;
+  public idComment: number;
+  public comments: Comment[];
 
   constructor(private contributionService: ContributionService,
     private commentService: CommentService,

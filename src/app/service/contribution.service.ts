@@ -68,6 +68,7 @@ export class ContributionService {
     return this.http.get<Contribution>(
     'https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id, httpOptions);
   }
+  
   getCommentsContributions(id: number): Observable<Comment[]> { //all
     const httpOptions = {
       headers: new HttpHeaders({
