@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Contribution } from '../models/contribution';
 import { ContributionService } from '../service/contribution.service';
 import {Router} from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
+import { ContributionDTO } from '../models/contributionDTO';
 
 @Component({
   selector: 'app-contributions-submit',
@@ -14,14 +16,23 @@ export class ContributionsSubmitComponent implements OnInit {
  constructor(private contributionService: ContributionService,
   private router: Router) { }
 
-
+  createForm = new FormGroup({
+    title: new FormControl(''),
+    url: new FormControl(''),
+    text: new FormControl(''),
+  });
+  
   ngOnInit(): void {
   }
   onSubmit() {
-    console.log("title",this.item.title);
-    this.contributionService.postContribution(this.item).subscribe(data => {
+    const postItem: ContributionDTO = {
+      title: this.createForm.controls['title'].value,
+      url: this.createForm.controls['url'].value,
+      text: this.createForm.controls['text'].value,
+    };
+    this.contributionService.postContribution(postItem).subscribe(data => {
       console.log("Submitted sucessful");
-      this.item = data;
+      this.router.navigateByUrl('/contributions');
     });
   }
 }
