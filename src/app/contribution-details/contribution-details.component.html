@@ -18,12 +18,11 @@
         </tr>
       </table>
         <table>
-          <form (ngSubmit)="onSubmit()">
+          <form [formGroup]="createForm"  (ngSubmit)="onSubmit()">
             <div class="col-10">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                [(ngModel)]="comment.content" name="first"></textarea>
+              <textarea class="form-control"  formControlName="content"></textarea>
             </div>
-            <button type="submit" id="btnSave" class="btn btn-primary">Update</button>
+            <button type="submit" >Update</button>
           </form>
         </table>
   </ol>

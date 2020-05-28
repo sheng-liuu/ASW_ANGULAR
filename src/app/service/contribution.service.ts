@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SocialUser } from 'angularx-social-login';
 import { Contribution } from '../models/contribution';
 import { ContributionDTO } from '../models/contributionDTO';
+import { identifierModuleUrl } from '@angular/compiler';
 
 
 
@@ -55,7 +56,7 @@ export class ContributionService {
     'https://hackernews12c.herokuapp.com/api/v1/contributions?nametype=ask', httpOptions);
   }
   
-  getContribution(id): Observable<Contribution> {
+  getContribution(id: number): Observable<Contribution> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -124,7 +125,7 @@ export class ContributionService {
     };
     return this.http.post<any>('https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id +'/vote',null, httpOptions);
   }
-  
+
   postUnvote(id:number): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
