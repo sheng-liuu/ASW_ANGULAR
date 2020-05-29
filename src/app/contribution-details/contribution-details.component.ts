@@ -57,7 +57,7 @@ export class ContributionDetailsComponent implements OnInit {
     };
     this.commentService.postComment(postItem).subscribe(data => {
       console.log("Comment sucessful");
-      this.router.navigateByUrl('/contribution-details/'+ this.idContribution);
+      window.location.reload();
     });
   }
 
