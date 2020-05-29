@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommentService } from '../service/comment.service';
 import { Comment } from '../models/comment';
+import {ContributionService} from '../service/contribution.service';
 
 @Component({
   selector: 'app-comment-basic',
@@ -11,7 +12,8 @@ export class CommentBasicComponent implements OnInit {
   @Input() comment: Comment;
   public replies: Comment[];
 
-  constructor(private commentService: CommentService) { }
+  constructor(private commentService: CommentService,
+  private contributionService: ContributionService) { }
 
   ngOnInit(): void {
     this.commentService.getReplies(this.comment.id).subscribe(data => {
@@ -21,7 +23,7 @@ export class CommentBasicComponent implements OnInit {
   }
 
   vote2(id: number): void {
-    this.commentService.postVote(id).subscribe(data => {
+    this.contributionService.postVote2(id).subscribe(data => {
       window.location.reload();
       console.log("Voted2 sucessful");
     });
@@ -29,11 +31,10 @@ export class CommentBasicComponent implements OnInit {
   }
 
   unvote2(id: number): void {
-    this.commentService.postUnvote(id).subscribe(data => {
+    this.contributionService.postUnvote2(id).subscribe(data => {
       window.location.reload();
       console.log("Unvoted2 sucessful");
     });
-
   }
 
   canVote2(item: Comment) {
