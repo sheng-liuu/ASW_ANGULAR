@@ -22,15 +22,18 @@
           </div>
           <button type="submit">Comment</button>
         </form>
-      <table>
-        <ol *ngIf="replies!=null">
-          <li *ngFor="let comment of replies;" class="post">
-            <td><img src="assets/vote.png" style="width:10px;height:10px"></td>
-            <td> <a [routerLink]="'/user'">{{comment.user_id}} </a></td>
-            <td><a [routerLink]="['/comment-details', comment.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a> ago | </td>
-            <app-comment-basic [comment]="comment"></app-comment-basic>
-         </li>
-        </ol>
+        <table>
+          <ol *ngIf="replies!=null">
+            <li *ngFor="let comment of replies;" class="post">
+          <td><img src="assets/vote.png" style="width:10px;height:10px"></td>
+          <td> <a [routerLink]="'/user'">{{comment.user_id}} </a></td>
+          <td><a [routerLink]="['/comment-details', comment.id]">{{comment.created_at | date:'dd/MM/yyyy hh:mm'}}</a> ago | </td>
+          <tr>
+            <td>{{comment.content}}</td>
+          </tr>
+          <app-comment-basic [comment]="comment"></app-comment-basic>
+          </li>
+</ol>
       </table>
 
 </table>
