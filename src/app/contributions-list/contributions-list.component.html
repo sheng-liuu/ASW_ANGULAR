@@ -7,7 +7,7 @@
             <img src="assets/vote.png" style="width:10px;height:10px">
           </a>
         <a *ngIf="item.nametype == 'url';else other_content">
-          <a style="color: #828282" href="{{item.url}}">({{item.title}})</a>
+          <a style="color: #828282" href="{{item.url}}" > {{item.title}} ({{item.url}})  </a>
         </a>
         <tr>
         <ng-template #other_content> {{item.title}} </ng-template>
