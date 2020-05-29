@@ -31,7 +31,26 @@ export class ContributionService {
     return this.http.get<Contribution[]>(
     'https://hackernews12c.herokuapp.com/api/v1/user/' +username + '/submitted', httpOptions);
   }
-  
+    postVote2(id: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'X-API-KEY': localStorage.getItem("apikey"),
+        'Accept': 'application/json'
+      })
+    };
+    return this.http.post<any>('https://hackernews12c.herokuapp.com/api/v1/comments/' + id +'/vote', null, httpOptions);
+  }
+  postUnvote2(id: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'X-API-KEY': localStorage.getItem("apikey"),
+        'Accept': 'application/json'
+      })
+    };
+    return this.http.delete<any>('https://hackernews12c.herokuapp.com/api/v1/comments/' + id + '/vote', httpOptions);
+  }
   getUpvoted(): Observable<Contribution[]> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -70,6 +89,26 @@ export class ContributionService {
   }
   
   getCommentsContributions(id: number): Observable<Comment[]> { //all
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'X-API-KEY': localStorage.getItem("apikey"),
+        'Accept': 'application/json'
+      })
+    };
+    return this.http.get<Comment[]>('https://hackernews12c.herokuapp.com/api/v1/contributions/'+ id +'/comments', httpOptions);
+  }
+  getCommentsReplies(id: number): Observable<Comment[]> { 
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'X-API-KEY': localStorage.getItem("apikey"),
+        'Accept': 'application/json'
+      })
+    };
+    return this.http.get<Comment[]>('https://hackernews12c.herokuapp.com/api/v1/comments/'+ id +'/replies', httpOptions);
+  }
+  getNumberComments(id: number): Observable<Comment[]> { //all
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',

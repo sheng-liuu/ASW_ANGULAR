@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContributionService } from '../service/contribution.service';
 import { Router,  ActivatedRoute  } from '@angular/router';
 import { Contribution } from '../models/contribution';
-
+import { Comment } from '../models/comment';
 
 @Component({
   selector: 'app-contributions-list',
@@ -12,7 +12,8 @@ import { Contribution } from '../models/contribution';
 export class ContributionsListComponent implements OnInit {
   items: Contribution[];
   public isLogin: boolean;
-  
+  comments: Comment[];
+  numbercomments: number
   constructor(private contributionService: ContributionService,
   private router: Router, private route: ActivatedRoute) { }
 
@@ -23,8 +24,14 @@ export class ContributionsListComponent implements OnInit {
         console.log("Contributions ask sucessful");
         this.items = data;
         });
+        
   }
-  
+  getNumberComments(id: number) {
+    this.contributionService.getNumberComments(id).subscribe(data => {
+      console.log("Comments sucessful");
+      this.numbercomments = data.length; 
+    });
+  }
   vote(id: number) :void{
     this.contributionService.postVote(id).subscribe(data => {
       window.location.reload();
