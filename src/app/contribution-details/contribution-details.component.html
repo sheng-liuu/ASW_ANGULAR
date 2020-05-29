@@ -44,9 +44,10 @@
                   <td> {{comment.content}} </td>
                 </div>
             </table>
+            <p><td><a [routerLink]="['/comment-details', comment.id]">reply</a></td></p>
             <app-comment-basic [comment]="comment"></app-comment-basic>
             </li>
-          </ol>
+</ol>
         </table>
      </ol>
    </div>
