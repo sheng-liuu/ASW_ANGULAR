@@ -105,7 +105,7 @@ export class ContributionDetailsComponent implements OnInit {
   }
 
   canVote2(item: Comment) {
-    console.log(item.points)
+    console.log(item.voted)
     if (localStorage.getItem("id") != item.user_id && item.voted == false) return true;
     else return false;
   }

@@ -2,7 +2,7 @@
   <div class="main-content">
     <ol *ngIf="item!=null">
       <div *ngIf="item.nametype == 'url';else other_content">
-        <a [routerLink]=item.url>{{item.title}}</a>
+        <a style="color: #828282" href="{{item.url}}" > {{item.title}} ({{item.url}})  </a>
       </div>
       <ng-template #other_content> {{item.title}} </ng-template>
 
@@ -25,29 +25,26 @@
             </div>
             <button type="submit" >Add Comment</button>
           </form>
-          <table>
-            <ol *ngIf="comments!=null">
-              <li *ngFor="let comment of comments;" class="post">
-            <tr>
-              <td>
-                <a (click)="vote2(comment.id)" *ngIf="canVote2(comment)">
-                  <img src="assets/vote.png" style="width:10px;height:10px">
-                </a>
-              </td>
-              <td> <a [routerLink]="'/user'">{{comment.user_name}} </a></td>
-              <td><a [routerLink]="['/comment-details', comment.id]">{{comment.created_at | date:'dd/MM/yyyy hh:mm'}}</a> |
-              <td>
-              <td> <a (click)="unvote2(comment.id)" *ngIf="canUnvote2(comment)">unvote |</a> </td>
-            </tr>
-            <table>
-              <tr>
-                <div>
-                  <td> {{comment.content}} </td>
-                </div>
-            </table>
-            <app-comment-basic [comment]="comment"></app-comment-basic>
+        <table>
+        <ol *ngIf="comments!=null">
+          <li *ngFor="let comment of comments;" class="post">
+                  <a (click)="vote2(comment.id)" *ngIf="canVote2(comment)">
+                    <img src="assets/vote.png" style="width:10px;height:10px"> </a>
+                    <a [routerLink] = "['/user', comment.user_name]">{{comment.user_name}} </a>
+                <a [routerLink]="['/comment-details', comment.id]">{{item.created_at | date:'dd/MM/yyyy hh:mm'}}</a>  
+                 <a (click)="unvote2(comment.id)" *ngIf="canUnvote2(comment)"> | unvote </a> 
+                <tr>
+                  <div>
+                    <td> {{comment.content}} </td>
+                  </div>
+                <tr>
+                  <div>
+                    <td><a [routerLink]="['/comment-details', comment.id]">reply</a></td>
+                  </div>
+                </tr>
+              <tr> <app-comment-basic [comment]="comment"></app-comment-basic> </tr>
             </li>
-          </ol>
+</ol>
         </table>
      </ol>
    </div>

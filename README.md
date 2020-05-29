@@ -12,4 +12,4 @@ Liu, Sheng
 
 Viñets, Ariadna
 
-Client Web @ Heroku: http://--------------------------
+Client Web @ Heroku: https://hackernews-angular.herokuapp.com
